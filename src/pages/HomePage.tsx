@@ -4,7 +4,7 @@ import { HeroSection } from "../components/HeroSection/HeroSection";
 import { OurServices } from "../components/OurServices/OurServices";
 import { SalonSection } from "../components/SalonSection/SalonSection";
 import { TestimonialSection } from "../components/TestimonialSection/TestimonialSection";
-
+import heroImage from "../assets/hero.png";
 export default function HomePage() {
 
   return (
@@ -28,7 +28,7 @@ export default function HomePage() {
       ))}
       */}
 
-      <HeroSection />
+      <HeroSection image={heroImage} />
       <SalonSection />
       <OurServices />
       <TestimonialSection />
