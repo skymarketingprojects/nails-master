@@ -11,7 +11,7 @@ export const LocationCard: React.FC<Props> = ({ location }) => {
     <article className={styles.card}>
       <a href={location.link} className={styles.card__link}>
         <img
-          src={location.image}
+          src={location.icon}
           alt={`${location.title} salon`}
           className={styles.card__image}
         />

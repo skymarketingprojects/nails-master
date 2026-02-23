@@ -1,3 +1,4 @@
+
 export interface FooterAddressData {
   title: string;
   description: Array<string>;
@@ -27,7 +28,7 @@ export const footerAddress: FooterAddressData = {
 };
 
 export const footerFollow: FooterFollowItem[] = [
-  { id: 1, label: "f", link: "#" },
+  { id: 1, label: "i", link: "https://www.instagram.com/nails_master_thestudio/" },
   { id: 2, label: "in", link: "#" },
   { id: 3, label: "t", link: "#" },
 ];

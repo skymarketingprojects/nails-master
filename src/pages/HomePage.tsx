@@ -6,10 +6,16 @@ import { SalonSection } from "../components/SalonSection/SalonSection";
 import { TestimonialSection } from "../components/TestimonialSection/TestimonialSection";
 // import heroImage from "../assets/hero.png";
 import homeBanner from "../assets/banner/Home-Banner.jpeg";
-export default function HomePage() {
+import SEO from "../components/SEO/SEO";
 
+export default function HomePage() {
   return (
     <div>
+      <SEO
+        title="Home"
+        description="Experience the best nail care at Nails Master. We offer professional manicure, pedicure, and nail art services."
+        keywords="nails, manicure, pedicure, nail art, beauty salon"
+      />
       {/* <h1>Home Page</h1>
 
       {locations.map((loc) => (
@@ -33,7 +39,7 @@ export default function HomePage() {
       <SalonSection />
       <OurServices />
       <TestimonialSection />
-      
+
 
     </div>
   );

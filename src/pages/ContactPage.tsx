@@ -31,6 +31,7 @@ import { LocationContactSection } from "../components/LocationContactSection/Loc
 import { HeroSection } from "../components/HeroSection/HeroSection";
 import { TestimonialSection } from "../components/TestimonialSection/TestimonialSection";
 import { LocationGalleryMapSection } from "../components/LocationGalleryMapSection/LocationGalleryMapSection";
+import SEO from "../components/SEO/SEO";
 
 export default function ContactPage() {
   const { slug } = useParams<{ slug: string }>();
@@ -45,6 +46,11 @@ export default function ContactPage() {
 
   return (
     <>
+      <SEO
+        title={location.title}
+        description={`Contact ${location.title} for the best nail care services in the area. Find our location, phone number, and hours.`}
+        keywords={`nails, manicure, pedicure, ${location.title}`}
+      />
       <HeroSection image={location.image} />
       <LocationContactSection location={location} />
       <LocationGalleryMapSection location={location} />

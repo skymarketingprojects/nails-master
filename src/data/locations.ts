@@ -4,6 +4,12 @@ import sector7OldImg from "../assets/locations/Sector 7.jpeg";
 import sector7NewImg from "../assets/locations/Sector-7(second).jpeg";
 import sector19Img from "../assets/locations/Sector-19.jpeg";
 
+import dashrathpuriIcon from "../assets/location-icon/Dashrathpuri.jpeg"
+import palamIcon from "../assets/location-icon/Palam.jpeg"
+import sector19Icon from "../assets/location-icon/Sector-19.jpeg"
+import sector7OldIcon from "../assets/location-icon/Sector-7-Old-branch.jpeg"
+import sector7NewIcon from "../assets/location-icon/Sector-7-new-branch.jpeg"
+
 const allLocationImages = import.meta.glob(
   "../assets/locations/*/*.{jpg,jpeg,png}",
   { eager: true, import: "default" }
@@ -25,6 +31,7 @@ export interface Location {
   id: number;
   title: string;
   image: string;
+  icon: string;
   rating: number;
   link: string;
   description?: string;
@@ -39,6 +46,7 @@ export const locations: Location[] = [
     id: 1,
     title: "Nail Master Palam",
     image: palamImg,
+    icon: palamIcon,
     rating: 0,
     link: "/contact/palam",
     description:
@@ -52,6 +60,7 @@ export const locations: Location[] = [
     id: 2,
     title: "Nail Master Dashrathpuri",
     image: dashrathpuriImg,
+    icon: dashrathpuriIcon,
     rating: 0,
     link: "/contact/dashrathpuri",
     description:
@@ -65,6 +74,7 @@ export const locations: Location[] = [
     id: 3,
     title: "Nail Master Sector 19",
     image: sector19Img,
+    icon: sector19Icon,
     rating: 0,
     link: "/contact/sector-19",
     description:
@@ -78,6 +88,7 @@ export const locations: Location[] = [
     id: 4,
     title: "Nail Master Sector 7 (Old Branch)",
     image: sector7OldImg,
+    icon: sector7OldIcon,
     rating: 0,
     link: "/contact/sector-7-old",
     description:
@@ -91,6 +102,7 @@ export const locations: Location[] = [
     id: 5,
     title: "Nail Master Sector 7 (New Branch)",
     image: sector7NewImg,
+    icon: sector7NewIcon,
     rating: 0,
     link: "/contact/sector-7-new",
     description:
