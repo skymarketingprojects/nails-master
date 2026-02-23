@@ -1,0 +1,195 @@
+.nav {
+    background: #ffffff;
+    border-bottom: 1px solid #eaeaea;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 16px 60px;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
+
+/* Logo */
+.logoCircle {
+    width: 70px;
+    height: 70px;
+    border-radius: 50%;
+    background: #000;
+    color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 9px;
+    font-weight: 600;
+    text-align: center;
+    letter-spacing: 1px;
+}
+
+/* Burger */
+.burger {
+    display: none;
+    background: none;
+    border: none;
+    font-size: 28px;
+    cursor: pointer;
+    color: #000;
+}
+
+/* Links */
+.nav__links {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 40px;
+}
+
+.nav__links a,
+.dropdown__button {
+    text-decoration: none;
+    background: none;
+    border: none;
+    color: #111;
+    font-size: 15px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: 0.2s ease;
+}
+
+.nav__links a:hover,
+.dropdown__button:hover {
+    opacity: 0.6;
+}
+
+/* Dropdown */
+.dropdown {
+    position: relative;
+    display: inline-flex;
+    flex-direction: column;
+}
+
+.dropdown__menu {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    margin-top: 0;
+    background: #fff;
+    border-radius: 16px;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    min-width: 220px;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15);
+}
+
+.dropdown__item {
+    background: transparent;
+    color: black;
+    border: none;
+    padding: 10px 0;
+    text-align: left;
+    cursor: pointer;
+    font-size: 14px;
+    /* border-bottom: 1px solid #eee; */
+}
+
+.dropdown__item:last-child {
+    border-bottom: none;
+}
+
+.dropdown__item:hover {
+    opacity: 0.6;
+}
+
+/* CTA */
+.nav__cta {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.phone {
+    font-size: 12px;
+    color: #777;
+}
+
+.bookBtn {
+    background: #000;
+    color: #fff;
+    padding: 12px 28px;
+    border-radius: 8px;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 14px;
+}
+
+.bookBtn:hover {
+    opacity: 0.85;
+}
+
+/* Mobile CTA hidden on desktop */
+.mobile__cta {
+    display: none;
+}
+
+/* ---------------- Mobile ---------------- */
+
+@media (max-width: 900px) {
+
+    .nav {
+        padding: 16px 20px;
+    }
+
+    .burger {
+        display: block;
+    }
+
+    .nav__cta {
+        display: none;
+    }
+
+    .nav__links {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100vh;
+        background: #fff;
+        flex-direction: column;
+        justify-content: center;
+        gap: 30px;
+        transform: translateY(-100%);
+        transition: transform 0.3s ease;
+    }
+
+    .open {
+        transform: translateY(0);
+    }
+
+    .dropdown__menu {
+        position: static;
+        box-shadow: none;
+        padding: 0;
+        margin-top: 10px;
+    }
+
+    .dropdown__item {
+        border: none;
+        font-size: 16px;
+        padding: 6px 0;
+    }
+
+    .mobile__cta {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 12px;
+        margin-top: 30px;
+    }
+
+    .nav__links a,
+    .dropdown__button {
+        font-size: 18px;
+    }
+}

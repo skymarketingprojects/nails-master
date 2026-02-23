@@ -1,0 +1,70 @@
+.section {
+    width: 100%;
+    padding: 10px 0 80px;
+    background: #f4f4f4;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.section__title {
+    font-size: 34px;
+    font-weight: 500;
+    margin-bottom: 70px;
+    text-align: center;
+    color: #333;
+}
+
+/* Grid */
+.section__grid {
+    width: 85%;
+    display: grid;
+    gap: 40px;
+    justify-content: center;
+}
+
+/* Desktop */
+@media (min-width: 1200px) {
+    .section__grid {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+
+/* Tablet */
+@media (min-width: 768px) and (max-width: 1199px) {
+    .section__grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+/* Mobile */
+@media (max-width: 767px) {
+    .section__grid {
+        grid-template-columns: 1fr;
+        width: 92%;
+    }
+}
+
+/* Dots */
+.section__dots {
+    margin-top: 50px;
+    display: flex;
+    gap: 12px;
+    justify-content: center;
+}
+
+.dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: #c4c4c4;
+    border: none;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.dotActive {
+    width: 12px;
+    height: 12px;
+    background: #444;
+}

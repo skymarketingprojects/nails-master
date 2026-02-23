@@ -1,0 +1,80 @@
+.card {
+    background: #ffffff;
+    border-radius: 16px;
+    padding: 40px 35px;
+    text-align: center;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    min-height: 340px;
+    border: 1px solid #dcdcdc;
+    transition: transform 0.25s ease;
+}
+
+.card:hover {
+    transform: translateY(-6px);
+}
+
+/* Avatar */
+.card__image {
+    width: 85px;
+    height: 85px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-bottom: 18px;
+}
+
+/* Name */
+.card__name {
+    margin: 0;
+    font-size: 18px;
+    font-weight: 600;
+    color: #222;
+}
+
+/* Designation (Google Rating text if used) */
+.card__designation {
+    font-size: 13px;
+    color: #777;
+    margin-top: 4px;
+    margin-bottom: 20px;
+}
+
+/* Divider line */
+.card::after {
+    content: "";
+    width: 80%;
+    height: 1px;
+    background: #e6e6e6;
+    margin: 20px 0;
+}
+
+/* Feedback */
+.card__feedback {
+    font-size: 14px;
+    line-height: 1.7;
+    max-width: 320px;
+    color: #555;
+}
+
+/* Tablet */
+@media (max-width: 1023px) {
+    .card {
+        padding: 30px 24px;
+        min-height: 320px;
+    }
+}
+
+/* Mobile */
+@media (max-width: 767px) {
+    .card {
+        padding: 25px 18px;
+        min-height: 280px;
+    }
+
+    .card__feedback {
+        font-size: 13px;
+    }
+}

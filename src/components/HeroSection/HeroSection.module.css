@@ -1,0 +1,43 @@
+.hero {
+    position: relative;
+    width: 100%;
+    overflow: hidden;
+}
+
+.hero__image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+/* Liquid glass overlay */
+.hero__overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to bottom right,
+            rgba(255, 255, 255, 0.25),
+            rgba(255, 255, 255, 0.05));
+    pointer-events: none;
+}
+
+/* Desktop */
+@media (min-width: 1024px) {
+    .hero {
+        height: 80vh;
+    }
+}
+
+/* Tablet */
+@media (min-width: 768px) and (max-width: 1023px) {
+    .hero {
+        height: 65vh;
+    }
+}
+
+/* Mobile */
+@media (max-width: 767px) {
+    .hero {
+        height: 50vh;
+    }
+}

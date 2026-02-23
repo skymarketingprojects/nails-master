@@ -1,0 +1,48 @@
+.card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background: #fff;
+    border: 1px solid #e0e0e0;
+    padding: 16px;
+    transition: box-shadow 0.25s ease;
+}
+
+.card:hover {
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.08);
+}
+
+.card__image {
+    width: 100%;
+    aspect-ratio: 1 / 1;
+    object-fit: cover;
+    margin-bottom: 14px;
+}
+
+.card__title {
+    margin: 0;
+    font-size: 18px;
+    font-weight: 500;
+    text-align: center;
+    color: #333;
+}
+
+.card__price {
+    margin: 6px 0 14px;
+    font-size: 16px;
+    color: #555;
+}
+
+.card__button {
+    padding: 8px 20px;
+    background: #1c1c1c;
+    color: #fff;
+    text-decoration: none;
+    font-size: 13px;
+    border-radius: 4px;
+    transition: background 0.2s ease;
+}
+
+.card__button:hover {
+    background: #000;
+}

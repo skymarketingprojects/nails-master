@@ -1,0 +1,25 @@
+.layout {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    background: transparent;
+}
+
+.main {
+    flex: 1;
+}
+.header-wrapper {
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
+
+.strip {
+    width: 100%;
+    background: #000;
+    color: #fff;
+}
+
+.nav {
+    width: 100%;
+}

@@ -1,0 +1,39 @@
+// import { Link } from "react-router-dom";
+// import { locations } from "../data/locations";
+import { HeroSection } from "../components/HeroSection/HeroSection";
+import { OurServices } from "../components/OurServices/OurServices";
+import { SalonSection } from "../components/SalonSection/SalonSection";
+import { TestimonialSection } from "../components/TestimonialSection/TestimonialSection";
+
+export default function HomePage() {
+
+  return (
+    <div>
+      {/* <h1>Home Page</h1>
+
+      {locations.map((loc) => (
+        <div key={loc.id}>
+          <h3>{loc.title}</h3>
+
+          <Link to={loc.link}>
+            Visit Location
+          </Link>
+
+          <br />
+
+          <Link to={`/contact/${loc.link.replace("/", "")}`}>
+            Contact {loc.title}
+          </Link> 
+        </div>
+      ))}
+      */}
+
+      <HeroSection />
+      <SalonSection />
+      <OurServices />
+      <TestimonialSection />
+      
+
+    </div>
+  );
+}

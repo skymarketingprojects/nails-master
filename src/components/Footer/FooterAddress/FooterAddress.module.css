@@ -1,0 +1,15 @@
+.address {
+    display: flex;
+    flex-direction: column;
+    /* gap: 10px; */
+}
+
+.title {
+    font-size: 18px;
+    font-weight: 500;
+}
+
+.text {
+    font-size: 14px;
+    opacity: 0.8;
+}
