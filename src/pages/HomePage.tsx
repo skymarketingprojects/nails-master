@@ -4,7 +4,8 @@ import { HeroSection } from "../components/HeroSection/HeroSection";
 import { OurServices } from "../components/OurServices/OurServices";
 import { SalonSection } from "../components/SalonSection/SalonSection";
 import { TestimonialSection } from "../components/TestimonialSection/TestimonialSection";
-import heroImage from "../assets/hero.png";
+// import heroImage from "../assets/hero.png";
+import homeBanner from "../assets/banner/Home-Banner.jpeg";
 export default function HomePage() {
 
   return (
@@ -28,7 +29,7 @@ export default function HomePage() {
       ))}
       */}
 
-      <HeroSection image={heroImage} />
+      <HeroSection image={homeBanner} />
       <SalonSection />
       <OurServices />
       <TestimonialSection />
