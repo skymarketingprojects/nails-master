@@ -4,12 +4,6 @@ export interface FooterAddressData {
   description: Array<string>;
 }
 
-export interface FooterFollowItem {
-  id: number;
-  label: string;
-  link: string;
-}
-
 export interface FooterChipData {
   id: number;
   label: string;
@@ -26,11 +20,30 @@ export const footerAddress: FooterAddressData = {
 
 
 };
+export type SocialPlatform = "instagram" | "linkedin" | "twitter";
+
+export interface FooterFollowItem {
+  id: number;
+  platform: SocialPlatform;
+  link: string;
+}
 
 export const footerFollow: FooterFollowItem[] = [
-  { id: 1, label: "i", link: "https://www.instagram.com/nails_master_thestudio/" },
-  { id: 2, label: "in", link: "#" },
-  { id: 3, label: "t", link: "#" },
+  {
+    id: 1,
+    platform: "instagram",
+    link: "https://www.instagram.com/nails_master_thestudio/",
+  },
+  {
+    id: 2,
+    platform: "linkedin",
+    link: "#",
+  },
+  {
+    id: 3,
+    platform: "twitter",
+    link: "#",
+  },
 ];
 
 export const footerChips: FooterChipData[] = [

@@ -1,6 +1,14 @@
 import React from "react";
 import styles from "./FooterFollow.module.css";
 import { footerFollow } from "../../../data/footer";
+import type { SocialPlatform } from "../../../data/footer";
+import { FaInstagram, FaLinkedinIn, FaTwitter } from "react-icons/fa";
+
+const iconMap: Record<SocialPlatform, React.ReactNode> = {
+  instagram: <FaInstagram />,
+  linkedin: <FaLinkedinIn />,
+  twitter: <FaTwitter />,
+};
 
 export const FooterFollow: React.FC = () => {
   return (
@@ -12,9 +20,11 @@ export const FooterFollow: React.FC = () => {
             key={item.id}
             href={item.link}
             className={styles.icon}
-            aria-label={item.label}
+            aria-label={item.platform}
+            target="_blank"
+            rel="noopener noreferrer"
           >
-            {item.label}
+            {iconMap[item.platform]}
           </a>
         ))}
       </div>

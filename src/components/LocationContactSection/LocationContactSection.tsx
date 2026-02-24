@@ -27,7 +27,7 @@ export const LocationContactSection: React.FC<Props> = ({
           </p>
 
           <a
-            href={location.link}
+            href={location.locationlink}
             className={styles.link}
           >
             Visit Location Page

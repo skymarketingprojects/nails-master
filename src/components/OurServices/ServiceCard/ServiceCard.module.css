@@ -40,9 +40,21 @@
     text-decoration: none;
     font-size: 13px;
     border-radius: 4px;
-    transition: background 0.2s ease;
+    transition: background 0.2s ease, color 0.2s ease;
+    display: inline-block;
 }
 
+/* kill default link colors */
+.card__button:link,
+.card__button:visited,
+.card__button:active,
+.card__button:focus {
+    color: #fff;
+    text-decoration: none;
+}
+
+/* controlled hover */
 .card__button:hover {
     background: #000;
+    color: #fff;
 }

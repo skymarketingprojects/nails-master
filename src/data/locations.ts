@@ -39,6 +39,7 @@ export interface Location {
   email: string;
   images: string[];
   mapLink: string;
+  locationlink: string;
 }
 
 export const locations: Location[] = [
@@ -54,6 +55,7 @@ export const locations: Location[] = [
     phone: "+91-7391009200",
     email: "",
     images: palamImages,
+    locationlink:"#",
     mapLink: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d7006.9682378251455!2d77.08070504384962!3d28.585250023846474!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x390d1b6907294eb5%3A0x27037222d3d77efb!2sRaj%20Nagar%20I%2C%20Raj%20Nagar%2C%20Delhi%2C%20110077!5e0!3m2!1sen!2sin!4v1771395666557!5m2!1sen!2sin",
   },
   {
@@ -68,6 +70,7 @@ export const locations: Location[] = [
     phone: "+91-9217347708",
     email: "",
     images: dashrathpuriImages,
+    locationlink:"#",
     mapLink: "https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d303.1424024067809!2d77.08060489084592!3d28.594515478705077!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e1!3m2!1sen!2sin!4v1771395576285!5m2!1sen!2sin",
   },
   {
@@ -82,6 +85,7 @@ export const locations: Location[] = [
     phone: "+91-9217347707",
     email: "",
     images: sector19Images,
+    locationlink:"#",
     mapLink: "https://www.google.com/maps/embed?pb=!1m16!1m12!1m3!1d112111.27064641866!2d77.00345361971121!3d28.585457453750706!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!2m1!1sPlot%20No-15%2C%20Block-B%2C%20Sector%2019%2C%20Dwarka%2C%20New%20Delhi!5e0!3m2!1sen!2sin!4v1771395754808!5m2!1sen!2sin",
   },
   {
@@ -96,6 +100,7 @@ export const locations: Location[] = [
     phone: "+91-9220309477",
     email: "",
     images: sector7OldImages,
+    locationlink:"#",
     mapLink: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3736.117507774118!2d77.06867817563553!3d28.58580878620062!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x390d1b0af0de53d7%3A0xc5ce3b49b9f77261!2sNAIL%20MASTER%20(nails%20studio)!5e1!3m2!1sen!2sin!4v1771394631336!5m2!1sen!2sin",
   },
   {
@@ -110,6 +115,7 @@ export const locations: Location[] = [
     phone: "+91-9217347706",
     email: "",
     images: sector7Images,
+    locationlink:"#",
     mapLink: "https://www.google.com/maps/embed?pb=!1m16!1m12!1m3!1d14013.151773926871!2d77.05573450520049!3d28.59113740649493!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!2m1!1sF-648%2C%20Ramphal%20Chowk%2C%20Dwarka%20Sector%207%2C%20New%20Delhi.!5e0!3m2!1sen!2sin!4v1771395941181!5m2!1sen!2sin",
   },
 ];
