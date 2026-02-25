@@ -1,7 +1,7 @@
 .section {
     width: 100%;
     background: #f2f2f2;
-    padding: 100px 40px 80px;
+    padding: 20px 2px;
     display: flex;
     gap: 60px;
     box-sizing: border-box;
@@ -27,6 +27,7 @@
     scroll-snap-type: x mandatory;
     -webkit-overflow-scrolling: touch;
     border-radius: 20px;
+    margin: auto;
 }
 
 .galleryWrapper::-webkit-scrollbar {
@@ -46,34 +47,38 @@
     /* cover ensures image fills the frame */
     scroll-snap-align: start;
 }
-.galleryContainer {
+/* .galleryContainer {
     display: flex;
     align-items: center;
-    gap: 20px;
+    gap: 5px;
+} */
+.galleryContainer {
+    position: relative;
+    width: 100%;
 }
-
 .arrowBtn {
-    width: 42px;
-    height: 42px;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 48px;
+    height: 48px;
     border-radius: 50%;
     border: none;
-    background: rgba(0, 0, 0, 0.06);
-    color: #111;
+    background: rgba(0, 0, 0, 0.65);
+    color: #fff;
     display: flex;
     align-items: center;
     justify-content: center;
     cursor: pointer;
-    transition: background 0.25s ease, transform 0.2s ease;
-    backdrop-filter: blur(10px);
-    flex-shrink: 0;
+    z-index: 5;
 }
 
-.arrowBtn:hover {
-    background: rgba(0, 0, 0, 0.12);
+.arrowBtn:first-of-type {
+    left: 12px;
 }
 
-.arrowBtn:active {
-    transform: scale(0.92);
+.arrowBtn:last-of-type {
+    right: 12px;
 }
 
 .dots {
@@ -110,6 +115,9 @@
     font-weight: 500;
     color: #333;
     margin: 0px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .description {
@@ -273,5 +281,30 @@
     .image {
         width: 100%;
         height: auto;
+    }
+}
+@media (max-width: 900px) {
+    .section {
+        flex-direction: column;
+        padding: 0;
+    }
+
+    .galleryContainer {
+        width: 100vw;
+        margin: auto;
+        padding: 10px;
+        border-radius: 10px;
+    }
+
+    .galleryWrapper {
+        aspect-ratio: 4 / 5;
+        border-radius: 0;
+        border-radius: 10px;
+    }
+
+    .arrowBtn {
+        z-index: 20;
+        width: 52px;
+        height: 52px;
     }
 }

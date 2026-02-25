@@ -16,7 +16,7 @@ export interface Service {
   link: string;
 }
 
-const phone = "911234567890";
+const phone = "9220309477";
 
 const createWhatsAppLink = (title: string, price: number) => {
   const message = `Hi, I want to book ${title} service priced at ₹${price}. Please share available slots.`;
