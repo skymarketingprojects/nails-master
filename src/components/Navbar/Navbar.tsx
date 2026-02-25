@@ -177,7 +177,7 @@ export const Navbar: React.FC = () => {
         <div className={styles.mobile__cta}>
           <p>Call Us</p>
           <div className={styles.phone}>
-          <p>Call Us</p><a href="tel:919220309477">+91 9220309477</a></div>
+          <p>Call Us</p><a href="https://wa.me/919220309477">+91 9220309477</a></div>
           <a
             href="https://example.com/book"
             target="_blank"
@@ -192,7 +192,7 @@ export const Navbar: React.FC = () => {
       {/* Desktop CTA */}
       <div className={styles.nav__cta}>
         <div className={styles.phone}>
-          <p>Call Us</p><a href="tel:919220309477">+91 9220309477</a></div>
+          <p>Call Us</p><a href="https://wa.me/919220309477">+91 9220309477</a></div>
         <a
           href="https://example.com/book"
           target="_blank"

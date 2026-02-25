@@ -175,7 +175,7 @@ export const LocationContactSection: React.FC<Props> = ({ location }) => {
           </a>
 
           {location.phone && (
-            <a href={`tel:${location.phone}`} className={styles.contact}>
+            <a href={`https://wa.me/${location.phone}`} className={styles.contact}>
               <FaPhoneAlt className={styles.contactIcon} />
               {location.phone}
             </a>
