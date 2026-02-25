@@ -1,6 +1,7 @@
 import styles from "./LocationContactSection.module.css";
 import type { Location } from "../../data/locations";
 import { FaLocationDot } from "react-icons/fa6";
+import { FcGoogle } from "react-icons/fc";
 import { FaPhoneAlt } from "react-icons/fa";
 import { MdEmail } from "react-icons/md";
 import React, { useEffect, useRef, useState } from "react";
@@ -130,6 +131,7 @@ export const LocationContactSection: React.FC<Props> = ({ location }) => {
 
           <div className={styles.ratingBlock}>
             <span className={styles.ratingText}>
+            <FcGoogle seed={23} className={styles.googleIcon} />
               {location.rating.toFixed(1)} / 5
             </span>
 

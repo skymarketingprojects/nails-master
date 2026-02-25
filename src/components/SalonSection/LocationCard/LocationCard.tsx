@@ -80,7 +80,7 @@ export const LocationCard: React.FC<Props> = ({ location }) => {
 
       {/* OUTLINED VISIT BUTTON */}
       <a
-        href={`tel:${location.phone}`}
+        href={`https://wa.me/${location.phone}?text=I+want+to+book+an+appointment`}
         // target="_blank"
         // rel="noopener noreferrer"
         className={styles.card__visitBtn}
