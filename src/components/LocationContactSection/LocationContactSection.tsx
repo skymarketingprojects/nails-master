@@ -193,7 +193,7 @@ export const LocationContactSection: React.FC<Props> = ({ location }) => {
       {/* FORM COLUMN */}
       <div className={styles.formWrapper}>
         <form
-          action="https://formspree.io/f/YOUR_FORM_ID"
+          action="https://formspree.io/f/mykdlvrr"
           method="POST"
           className={styles.form}
         >
