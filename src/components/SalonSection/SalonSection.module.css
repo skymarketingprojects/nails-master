@@ -109,6 +109,9 @@
 
 /* Mobile */
 @media (max-width: 767px) {
+    .section__header{
+        margin-bottom: 30px;
+    }
 
     .section__carousel {
         width: 100vw;

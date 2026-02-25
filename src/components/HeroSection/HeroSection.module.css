@@ -48,3 +48,10 @@
         display: block;
     }
 }
+
+@media (max-width: 540px) {
+    .hero {
+        height: 20vh;
+    }
+
+}

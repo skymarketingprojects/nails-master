@@ -113,6 +113,7 @@
 .title {
     font-size: 42px;
     font-weight: 500;
+    width: 80%;
     color: #333;
     margin: 0px;
     display: flex;
@@ -125,7 +126,7 @@
     line-height: 1.6;
     color: #555;
     text-align: center;
-    width: 90%;
+    width: 80%;
     margin: 0px;
 }
 
@@ -292,7 +293,8 @@
     .galleryContainer {
         width: 100vw;
         margin: auto;
-        padding: 10px;
+        /* padding: 10px; */
+        padding: 10px 0px;
         border-radius: 10px;
     }
 
