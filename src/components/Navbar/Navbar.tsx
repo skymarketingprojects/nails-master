@@ -68,7 +68,7 @@
 
 //         {/* Mobile CTA */}
 //         <div className={styles.mobile__cta}>
-//           <div className={styles.phone}>1500-2399-2020</div>
+//           <div className={styles.phone}>+91 9220309477</div>
 //           <a
 //             href="https://example.com/book"
 //             target="_blank"
@@ -82,7 +82,7 @@
 
 //       {/* Desktop CTA */}
 //       <div className={styles.nav__cta}>
-//         <div className={styles.phone}>1500-2399-2020</div>
+//         <div className={styles.phone}>+91 9220309477</div>
 //         <a
 //           href="https://example.com/book"
 //           target="_blank"
@@ -155,7 +155,7 @@ export const Navbar: React.FC = () => {
             className={styles.dropdown__button}
             onClick={() => mobileOpen && setContactOpen(!contactOpen)}
           >
-            Contact
+            Branches
           </button>
 
           {contactOpen && (
@@ -175,7 +175,9 @@ export const Navbar: React.FC = () => {
 
         {/* Mobile CTA */}
         <div className={styles.mobile__cta}>
-          <div className={styles.phone}>1500-2399-2020</div>
+          <p>Call Us</p>
+          <div className={styles.phone}>
+          <p>Call Us</p><a href="tel:919220309477">+91 9220309477</a></div>
           <a
             href="https://example.com/book"
             target="_blank"
@@ -189,7 +191,8 @@ export const Navbar: React.FC = () => {
 
       {/* Desktop CTA */}
       <div className={styles.nav__cta}>
-        <div className={styles.phone}>1500-2399-2020</div>
+        <div className={styles.phone}>
+          <p>Call Us</p><a href="tel:919220309477">+91 9220309477</a></div>
         <a
           href="https://example.com/book"
           target="_blank"

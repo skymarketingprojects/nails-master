@@ -92,13 +92,14 @@
 @media (max-width: 1023px) {
 
     .section__carousel {
-        width: 90%;
+        width: 100vw;
         gap: 20px;
     }
 
     .section__cards {
         gap: 40px;
-        flex-wrap: wrap;
+        overflow: scroll;
+        justify-content: flex-start;
     }
 
     .largeHeading {
@@ -110,13 +111,22 @@
 @media (max-width: 767px) {
 
     .section__carousel {
-        width: 95%;
+        width: 100vw;
         gap: 12px;
+        
     }
 
     .section__cards {
-        flex-wrap: wrap;
-        gap: 24px;
+        overflow: scroll;
+        gap: 50px;
+        justify-content: flex-start;
+        scrollbar-width: none;
+        /* Firefox */
+        -ms-overflow-style: none;
+    }
+    .section__cards::-webkit-scrollbar {
+        display: none;
+        /* Chrome, Safari */
     }
 
     .largeHeading {

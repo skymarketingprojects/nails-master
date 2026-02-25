@@ -22,7 +22,7 @@ export const MainLayout: React.FC<Props> = ({
 
       <Footer />
 
-      <FloatingWhatsappButton phoneNumber="1234567890" />
+      <FloatingWhatsappButton phoneNumber="9220309477" />
     </div>
   );
 };

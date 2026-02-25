@@ -11,18 +11,6 @@ export const LocationGalleryMapSection: React.FC<Props> = ({
 }) => {
   return (
     <section className={styles.section}>
-      {/* GOOGLE MAP */}
-      <div className={styles.mapWrapper}>
-        <iframe
-          src={location.mapLink}
-          className={styles.map}
-          loading="lazy"
-          allowFullScreen
-          referrerPolicy="no-referrer-when-downgrade"
-          title={`${location.title} Map`}
-        />
-      </div>
-
       {/* IMAGE GALLERY */}
       <div className={styles.galleryWrapper}>
         <div className={styles.gallery}>
@@ -36,6 +24,19 @@ export const LocationGalleryMapSection: React.FC<Props> = ({
           ))}
         </div>
       </div>
+      {/* GOOGLE MAP */}
+      <div className={styles.mapWrapper}>
+        <iframe
+          src={location.mapLink}
+          className={styles.map}
+          loading="lazy"
+          allowFullScreen
+          referrerPolicy="no-referrer-when-downgrade"
+          title={`${location.title} Map`}
+        />
+      </div>
+
+      
     </section>
   );
 };

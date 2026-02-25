@@ -46,25 +46,143 @@
 }
 
 /* Dots */
+/* Pagination Wrapper */
 .section__dots {
-    margin-top: 50px;
+    margin-top: 60px;
     display: flex;
-    gap: 12px;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Capsule background (Apple style track) */
+.section__dots::before {
+    content: "";
+    position: absolute;
+}
+
+/* Dot Base */
+.dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 999px;
+    border: none;
+    background: rgba(0, 0, 0, 0.25);
+    margin: 0 6px;
+    cursor: pointer;
+    transition:
+        transform 0.3s ease,
+        background 0.3s ease,
+        width 0.3s ease,
+        opacity 0.3s ease;
+    opacity: 0.6;
+}
+
+/* Hover subtle scale */
+.dot:hover {
+    transform: scale(1.2);
+}
+
+/* Active Dot */
+.dotActive {
+    width: 24px;
+    /* capsule expansion */
+    background: #111;
+    opacity: 1;
+}
+/* Dots Wrapper */
+.section__dots {
+    margin-top: 60px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    max-width: 100%;
+    overflow: hidden;
+    padding: 0 16px;
+    /* prevents edge collision */
+}
+
+/* Optional: hard width cap on very small screens */
+@media (max-width: 480px) {
+    .section__dots {
+        max-width: 220px;
+        /* limits total dot track length */
+        margin-left: auto;
+        margin-right: auto;
+    }
+}
+.dot {
+    transform-origin: center;
+}
+.pagination {
+    margin-top: 60px;
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    justify-content: center;
+}
+/* WRAPPER */
+.carouselRow {
+    width: 92%;
+    max-width: 1200px;
+    position: relative;
+    display: flex;
     justify-content: center;
 }
 
-.dot {
-    width: 10px;
-    height: 10px;
-    border-radius: 50%;
-    background: #c4c4c4;
-    border: none;
-    cursor: pointer;
-    transition: all 0.3s ease;
+/* GRID TAKES FULL WIDTH INSIDE WRAPPER */
+.section__grid {
+    width: 100%;
 }
 
-.dotActive {
-    width: 12px;
-    height: 12px;
-    background: #444;
+/* ARROWS OVERLAYED */
+.arrowBtn {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    border: none;
+    background: rgba(0, 0, 0, 0.06);
+    color: #111;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: background 0.25s ease, transform 0.2s ease;
+}
+
+/* LEFT */
+.arrowBtn:first-of-type {
+    left: -20px;
+}
+
+/* RIGHT */
+.arrowBtn:last-of-type {
+    right: -20px;
+}
+
+.arrowBtn:hover {
+    background: rgba(0, 0, 0, 0.12);
+}
+
+.arrowBtn:active {
+    transform: translateY(-50%) scale(0.92);
+}
+@media (max-width: 767px) {
+
+    .carouselRow {
+        width: 92%;
+    }
+
+    .arrowBtn:first-of-type {
+        left: 8px;
+        /* move inside */
+    }
+
+    .arrowBtn:last-of-type {
+        right: 8px;
+        /* move inside */
+    }
 }

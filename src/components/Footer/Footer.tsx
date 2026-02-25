@@ -12,8 +12,7 @@ export const Footer: React.FC = () => {
         <div className={styles.brand}>
           <h3 className={styles.logo}>NAILS MASTER</h3>
           <p className={styles.desc}>
-            Lorem Ipsum is simply dummy text of the printing and typesetting
-            industry. Lorem Ipsum has been the industry's standard dummy text.
+            At Nails Master The Studio, we blend creativity, precision, and care to give you flawless hair transformations and beautifully crafted nails. From seamless balayage to stunning acrylic extensions and detailed nail art, every service is designed to exceed expectations in a warm, welcoming space. Step in for a refreshing experience and walk out feeling confident, pampered, and absolutely in love with your look.
           </p>
         </div>
 

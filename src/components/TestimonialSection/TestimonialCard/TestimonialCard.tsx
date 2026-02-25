@@ -1,6 +1,7 @@
 import React from "react";
 import styles from "./TestimonialCard.module.css";
 import type { Testimonial } from "../../../data/testimonials";
+import { FcGoogle } from "react-icons/fc";
 
 interface Props {
   testimonial: Testimonial;
@@ -23,6 +24,7 @@ export const TestimonialCard: React.FC<Props> = ({ testimonial }) => {
 
       {testimonial.designation && (
         <span className={styles.card__designation}>
+          <FcGoogle className={styles.googleIcon} />
           {testimonial.designation}
         </span>
       )}
