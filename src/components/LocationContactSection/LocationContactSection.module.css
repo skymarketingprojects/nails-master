@@ -5,6 +5,7 @@
     display: flex;
     gap: 60px;
     box-sizing: border-box;
+    text-align: center;
 }
 
 /* LEFT COLUMN */
@@ -114,6 +115,7 @@
     font-size: 42px;
     font-weight: 500;
     width: 80%;
+
     color: #333;
     margin: 0px;
     display: flex;
