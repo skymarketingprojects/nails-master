@@ -85,9 +85,10 @@ export const locations: Location[] = [
     phone: "9217347707",
     email: "",
     images: sector19Images,
-    locationlink:"#",
-    mapLink: "https://www.google.com/maps/embed?pb=!1m16!1m12!1m3!1d112111.27064641866!2d77.00345361971121!3d28.585457453750706!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!2m1!1sPlot%20No-15%2C%20Block-B%2C%20Sector%2019%2C%20Dwarka%2C%20New%20Delhi!5e0!3m2!1sen!2sin!4v1771395754808!5m2!1sen!2sin",
+    locationlink:"https://maps.app.goo.gl/Cig9SvnSuey7xXHV7",
+    mapLink: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3503.749135472984!2d77.04682509999999!3d28.5772949!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x390d1b2661f53b19%3A0x38f73ca32d02cf7a!2sNail%20master%20sector%2019!5e0!3m2!1sen!2sin!4v1772021060487!5m2!1sen!2sin",
   },
+
   {
     id: 4,
     title: "Nail Master Sector 7 (Old Branch)",
@@ -115,7 +116,7 @@ export const locations: Location[] = [
     phone: "9217347706",
     email: "",
     images: sector7Images,
-    locationlink:"#",
-    mapLink: "https://www.google.com/maps/embed?pb=!1m16!1m12!1m3!1d14013.151773926871!2d77.05573450520049!3d28.59113740649493!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!2m1!1sF-648%2C%20Ramphal%20Chowk%2C%20Dwarka%20Sector%207%2C%20New%20Delhi.!5e0!3m2!1sen!2sin!4v1771395941181!5m2!1sen!2sin",
+    locationlink:"https://maps.app.goo.gl/ourvmoD3FzgWEMwt5",
+    mapLink: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3503.4428443140678!2d77.07145!3d28.586488799999994!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x390d1b0d35710cc9%3A0x20d56a7318ed53e8!2sNails%20master%20branch%202!5e0!3m2!1sen!2sin!4v1772020963110!5m2!1sen!2sin",
   },
 ];
