@@ -101,7 +101,7 @@ export const locations: Location[] = [
     phone: "9220309477",
     email: "",
     images: sector7OldImages,
-    locationlink:"#",
+    locationlink:"https://maps.app.goo.gl/qQtbr4xqZ8Su12eQ7",
     mapLink: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3736.117507774118!2d77.06867817563553!3d28.58580878620062!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x390d1b0af0de53d7%3A0xc5ce3b49b9f77261!2sNAIL%20MASTER%20(nails%20studio)!5e1!3m2!1sen!2sin!4v1771394631336!5m2!1sen!2sin",
   },
   {
