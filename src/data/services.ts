@@ -6,6 +6,8 @@ import headMassage from "../assets/services/Head-Massage.jpeg";
 import manicure from "../assets/services/Manicure.jpeg";
 import nailArt from "../assets/services/Nail-Art.jpeg";
 import pedicure from "../assets/services/Pedicure.jpeg";
+import brochure from "../assets/brochure.pdf";
+import brochure2 from "../assets/brochure2.pdf";
 import waxing from "../assets/services/Waxing.jpeg";
 
 export interface Service {
@@ -14,8 +16,8 @@ export interface Service {
   image: string;
   price: number;
   link: string;
+  brochure: string;
 }
-
 const phone = "9220309477";
 
 const createWhatsAppLink = (title: string, price: number) => {
@@ -30,6 +32,7 @@ export const services: Service[] = [
     image: nailsExtention,
     price: 800,
     link: createWhatsAppLink("Acrylic Extensions", 800),
+    brochure: brochure,
   },
   {
     id: 2,
@@ -37,6 +40,7 @@ export const services: Service[] = [
     image: gelPolish,
     price: 1000,
     link: createWhatsAppLink("Gel Extensions", 1000),
+    brochure: brochure,
   },
   {
     id: 3,
@@ -44,6 +48,7 @@ export const services: Service[] = [
     image: facial,
     price: 800,
     link: createWhatsAppLink("facial", 800),
+    brochure: brochure2,
   },
   {
     id: 4,
@@ -51,6 +56,7 @@ export const services: Service[] = [
     image: hairSpa,
     price: 250,
     link: createWhatsAppLink("hair cut & wash", 250),
+    brochure: brochure2,
   },
   {
     id: 5,
@@ -58,6 +64,7 @@ export const services: Service[] = [
     image: manicure,
     price: 500,
     link: createWhatsAppLink("Overlay", 500),
+    brochure: brochure,
   },
   {
     id: 6,
@@ -65,6 +72,7 @@ export const services: Service[] = [
     image: pedicure,
     price: 500,
     link: createWhatsAppLink("Temporary Extensions", 500),
+    brochure: brochure,
   },
   {
     id: 7,
@@ -72,6 +80,7 @@ export const services: Service[] = [
     image: waxing,
     price: 70,
     link: createWhatsAppLink("face wax", 70),
+    brochure: brochure2,
   },
   {
     id: 8,
@@ -79,6 +88,7 @@ export const services: Service[] = [
     image: headMassage,
     price: 800,
     link: createWhatsAppLink("hair colors", 800),
+    brochure: brochure2,
   },
   {
     id: 9,
@@ -86,6 +96,7 @@ export const services: Service[] = [
     image: nailArt,
     price: 100,
     link: createWhatsAppLink("Nail Art", 100),
+    brochure: brochure2,
   },
   {
     id: 10,
@@ -93,6 +104,7 @@ export const services: Service[] = [
     image: nailsExtention,
     price: 300,
     link: createWhatsAppLink("Removal", 300),
+    brochure: brochure,
   },
   {
     id: 11,
@@ -100,6 +112,7 @@ export const services: Service[] = [
     image: manicure,
     price: 500,
     link: createWhatsAppLink("cleanups", 500),
+    brochure: brochure2,
   },
   {
     id: 12,
@@ -107,6 +120,7 @@ export const services: Service[] = [
     image: pedicure,
     price: 500,
     link: createWhatsAppLink("dtan/bleach", 500),
+    brochure: brochure2,
   },
   {
     id: 13,
@@ -114,6 +128,7 @@ export const services: Service[] = [
     image: hairSpa,
     price: 2500,
     link: createWhatsAppLink("nail art", 2500),
+    brochure: brochure2,
   },
   {
     id: 14,
@@ -121,6 +136,7 @@ export const services: Service[] = [
     image: waxing,
     price: 100,
     link: createWhatsAppLink("waxing", 100),
+    brochure: brochure2,
   },
   {
     id: 15,
@@ -128,6 +144,7 @@ export const services: Service[] = [
     image: headMassage,
     price: 500,
     link: createWhatsAppLink("body polishing/ scrubbing", 500),
+    brochure: brochure2,
   },
   {
     id: 16,
@@ -135,6 +152,7 @@ export const services: Service[] = [
     image: manicure,
     price: 100,
     link: createWhatsAppLink("manicure/pedicure", 400),
+    brochure: brochure2,
   },
   {
     id: 17,
@@ -142,6 +160,7 @@ export const services: Service[] = [
     image: pedicure,
     price: 40,
     link: createWhatsAppLink("threadwork", 40),
+    brochure: brochure2,
   },
   {
     id: 18,
@@ -149,6 +168,7 @@ export const services: Service[] = [
     image: pedicure,
     price: 11500,
     link: createWhatsAppLink("gel polish", 11500),
+    brochure: brochure2,
   },
   {
     id: 19,
@@ -156,6 +176,7 @@ export const services: Service[] = [
     image: hairSpa,
     price: 500,
     link: createWhatsAppLink("bridal packages", 500),
+    brochure: brochure2,
   },
   {
     id: 20,
@@ -163,6 +184,7 @@ export const services: Service[] = [
     image: headMassage,
     price: 300,
     link: createWhatsAppLink("hairspa/ head massage", 300),
+    brochure: brochure2,
   },
 ];
 

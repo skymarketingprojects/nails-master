@@ -1,7 +1,6 @@
 import React from "react";
 import styles from "./ServiceCard.module.css";
 import type { Service } from "../../../data/services";
-import brochurePdf from "../../../assets/brochure.pdf";
 
 interface Props {
   service: Service;
@@ -31,7 +30,7 @@ export const ServiceCard: React.FC<Props> = ({ service }) => {
         </a>
 
         <a
-          href={brochurePdf}
+          href={service.brochure}
           download="Brochure.pdf"
           className={styles.card__buttonOutline}
         >
