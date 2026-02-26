@@ -35,7 +35,7 @@ export const ServiceCard: React.FC<Props> = ({ service }) => {
           download="Brochure.pdf"
           className={styles.card__buttonOutline}
         >
-          Download Brochure
+          Brochure
         </a>
       </div>
     </article>
