@@ -1,6 +1,7 @@
 import React from "react";
 import styles from "./ServiceCard.module.css";
 import type { Service } from "../../../data/services";
+import brochurePdf from "../../../assets/brochure.pdf";
 
 interface Props {
   service: Service;
@@ -17,16 +18,26 @@ export const ServiceCard: React.FC<Props> = ({ service }) => {
 
       <h3 className={styles.card__title}>{service.title}</h3>
 
-      <p className={styles.card__price}>₹{service.price}/-</p>
+      <p className={styles.card__price}>Starts from ₹{service.price}/-</p>
 
-      <a
-        href={service.link}
-        target="_blank"
-        rel="noopener noreferrer"
-        className={styles.card__button}
-      >
-        Book Now
-      </a>
+      <div className={styles.card__actions}>
+        <a
+          href={service.link}
+          target="_blank"
+          rel="noopener noreferrer"
+          className={styles.card__button}
+        >
+          Book Now
+        </a>
+
+        <a
+          href={brochurePdf}
+          download="Brochure.pdf"
+          className={styles.card__buttonOutline}
+        >
+          Download Brochure
+        </a>
+      </div>
     </article>
   );
 };
