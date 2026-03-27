@@ -1,11 +1,32 @@
 import React, { useState, useEffect } from "react";
 import styles from "./OurServices.module.css";
-import { services } from "../../data/services";
+import { services as staticServices } from "../../data/services";
 import { ServiceCard } from "./ServiceCard/ServiceCard";
+import { api } from "../../api/baseApi";
+import type { Service } from "../../api/types";
 
 export const OurServices: React.FC = () => {
+  const [services, setServices] = useState<Service[]>(staticServices);
   const [visibleCount, setVisibleCount] = useState(6);
   const [increment, setIncrement] = useState(3);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const fetchServices = async () => {
+      try {
+        const data = await api.getServices();
+        if (data && data.length > 0) {
+          setServices(data);
+        }
+      } catch (error) {
+        console.error("Failed to fetch services:", error);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchServices();
+  }, []);
 
   useEffect(() => {
     const updateIncrement = () => {
@@ -28,6 +49,8 @@ export const OurServices: React.FC = () => {
   const handleViewAll = () => {
     setVisibleCount((prev) => prev + increment);
   };
+
+  if (loading && services.length === 0) return null;
 
   return (
     <section id="services" className={styles.section} aria-labelledby="services-heading">
@@ -54,3 +77,4 @@ export const OurServices: React.FC = () => {
     </section>
   );
 };
+

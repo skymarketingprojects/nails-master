@@ -1,11 +1,30 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import styles from "./Footer.module.css";
-import { footerChips } from "../../data/footer";
+import { footerChips as staticChips } from "../../data/footer";
 import { FooterChip } from "./FooterChip/FooterChip";
 import { FooterAddress } from "./FooterAddress/FooterAddress";
 import { FooterFollow } from "./FooterFollow/FooterFollow";
+import { api } from "../../api/baseApi";
+import type { FooterChipData } from "../../api/types";
 
 export const Footer: React.FC = () => {
+  const [chips, setChips] = useState<FooterChipData[]>(staticChips);
+
+  useEffect(() => {
+    const fetchChips = async () => {
+      try {
+        const data = await api.getFooterChips();
+        if (data && data.length > 0) {
+          setChips(data);
+        }
+      } catch (error) {
+        console.error("Failed to fetch footer chips:", error);
+      }
+    };
+
+    fetchChips();
+  }, []);
+
   return (
     <footer className={styles.footer}>
       <div className={styles.top}>
@@ -32,7 +51,7 @@ export const Footer: React.FC = () => {
       </div>
 
       <div className={styles.chips}>
-        {footerChips.map((chip) => (
+        {chips.map((chip) => (
           <FooterChip key={chip.id} chip={chip} />
         ))}
       </div>
@@ -43,3 +62,4 @@ export const Footer: React.FC = () => {
     </footer>
   );
 };
+

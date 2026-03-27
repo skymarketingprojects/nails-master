@@ -1,11 +1,32 @@
 import React, { useState, useEffect } from "react";
 import styles from "./TestimonialSection.module.css";
-import { testimonials } from "../../data/testimonials";
+import { testimonials as staticTestimonials } from "../../data/testimonials";
 import { TestimonialCard } from "./TestimonialCard/TestimonialCard";
+import { api } from "../../api/baseApi";
+import type { Testimonial } from "../../api/types";
 
 export const TestimonialSection: React.FC = () => {
+  const [testimonials, setTestimonials] = useState<Testimonial[]>(staticTestimonials);
   const [currentPage, setCurrentPage] = useState(0);
   const [itemsPerView, setItemsPerView] = useState(3);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const fetchTestimonials = async () => {
+      try {
+        const data = await api.getTestimonials();
+        if (data && data.length > 0) {
+          setTestimonials(data);
+        }
+      } catch (error) {
+        console.error("Failed to fetch testimonials:", error);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchTestimonials();
+  }, []);
 
   useEffect(() => {
     const updateLayout = () => {
@@ -25,14 +46,13 @@ export const TestimonialSection: React.FC = () => {
     return () => window.removeEventListener("resize", updateLayout);
   }, []);
   
-  
   const totalPages = Math.ceil(testimonials.length / itemsPerView);
   
   useEffect(() => {
-        if (currentPage >= totalPages) {
-            setCurrentPage(0);
-        }
-    }, [itemsPerView, totalPages, currentPage]);
+    if (currentPage >= totalPages && totalPages > 0) {
+      setCurrentPage(0);
+    }
+  }, [itemsPerView, totalPages, currentPage]);
 
   const startIndex = currentPage * itemsPerView;
   const visibleTestimonials = testimonials.slice(
@@ -41,13 +61,16 @@ export const TestimonialSection: React.FC = () => {
   );
 
   const goToPage = (page: number) => {
-    if (page < 0) page = totalPages - 1;
-    if (page >= totalPages) page = 0;
-    setCurrentPage(page);
+    let targetPage = page;
+    if (page < 0) targetPage = totalPages - 1;
+    if (page >= totalPages) targetPage = 0;
+    setCurrentPage(targetPage);
   };
 
   const goPrev = () => goToPage(currentPage - 1);
   const goNext = () => goToPage(currentPage + 1);
+
+  if (loading && testimonials.length === 0) return null;
 
   return (
     <section className={styles.section} aria-labelledby="testimonial-heading">
@@ -74,8 +97,6 @@ export const TestimonialSection: React.FC = () => {
             <path d="M15 18L9 12L15 6" />
           </svg>
         </button>
-
-
 
         <div className={styles.section__grid}>
           {visibleTestimonials.map((testimonial) => (
@@ -120,4 +141,4 @@ export const TestimonialSection: React.FC = () => {
       </div>
     </section>
   );
-  };
+};
