@@ -52,11 +52,28 @@ export const OurServices: React.FC = () => {
 
   if (loading && services.length === 0) return null;
 
+  const TABS = ["View All", "Nail extension", "Hair color", "Acrylic gel", "Makeup"];
+  const [activeTab, setActiveTab] = useState("View All");
+
   return (
     <section id="services" className={styles.section} aria-labelledby="services-heading">
       <h2 id="services-heading" className={styles.section__title}>
-        Our Services
+        Our Services:
       </h2>
+
+      <div className={styles.section__tabsWrapper}>
+        <div className={styles.section__tabs}>
+          {TABS.map((tab) => (
+            <button
+              key={tab}
+              className={`${styles.tabBtn} ${activeTab === tab ? styles.tabBtnActive : ""}`}
+              onClick={() => setActiveTab(tab)}
+            >
+              {tab}
+            </button>
+          ))}
+        </div>
+      </div>
 
       <div className={styles.section__grid}>
         {services.slice(0, visibleCount).map((service) => (
@@ -68,9 +85,9 @@ export const OurServices: React.FC = () => {
         <div className={styles.section__footer}>
           <button
             onClick={handleViewAll}
-            className={styles.section__viewAll}
+            className={styles.section__viewMore}
           >
-            View All
+            View More
           </button>
         </div>
       )}

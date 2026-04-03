@@ -34,8 +34,9 @@
 .section__cards {
     display: flex;
     justify-content: center;
-    align-items: center;
-    /* gap: 60px; */
+    align-items: stretch;
+    gap: 30px;
+    flex-wrap: wrap;
     flex: 1;
 }
 

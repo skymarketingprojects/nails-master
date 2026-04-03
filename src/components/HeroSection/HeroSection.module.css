@@ -1,57 +1,18 @@
 .hero {
     position: relative;
     width: 100%;
-    height: 60%;
-    overflow: hidden;
-    background: #f4f4f4;
+    height: auto;
+    background: #fff;
 }
 
 .hero__image {
     width: 100%;
-    /* height: 70%; */
+    height: auto;
     object-fit: cover;
     display: block;
 }
 
-/* Liquid glass overlay */
+/* Optional soft overlay to make it look smooth if needed, but keeping it empty per user design */
 .hero__overlay {
-    position: absolute;
-    inset: 0;
-    background: linear-gradient(to bottom right,
-            rgba(255, 255, 255, 0.25),
-            rgba(255, 255, 255, 0.05));
-    pointer-events: none;
-}
-
-/* Desktop */
-@media (min-width: 1024px) {
-    .hero {
-        height: 70vh;
-    }
-}
-
-/* Tablet */
-@media (min-width: 768px) and (max-width: 1023px) {
-    .hero {
-        height: 65vh;
-    }
-}
-
-/* Mobile */
-@media (max-width: 767px) {
-    .hero {
-        height: 30vh;
-    }
-    .hero__image {
-        width: 100%;
-        object-fit: cover;
-        display: block;
-    }
-}
-
-@media (max-width: 540px) {
-    .hero {
-        height: 20vh;
-    }
-
+    display: none;
 }

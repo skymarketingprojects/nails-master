@@ -29,9 +29,12 @@ export const Footer: React.FC = () => {
     <footer className={styles.footer}>
       <div className={styles.top}>
         <div className={styles.brand}>
-          <h3 className={styles.logo}>NAILS MASTER</h3>
+          <div className={styles.logoWrapper}>
+            <h3 className={styles.logoDark}>NAILS MASTER</h3>
+            <p className={styles.logoLight}>the studio</p>
+          </div>
           <p className={styles.desc}>
-            At Nails Master The Studio, we blend creativity, precision, and care to give you flawless hair transformations and beautifully crafted nails. From seamless balayage to stunning acrylic extensions and detailed nail art, every service is designed to exceed expectations in a warm, welcoming space. Step in for a refreshing experience and walk out feeling confident, pampered, and absolutely in love with your look.
+            Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer
           </p>
         </div>
 
@@ -46,14 +49,32 @@ export const Footer: React.FC = () => {
           </ul>
         </div>
 
-        <FooterAddress />
-        <FooterFollow />
+        <div className={styles.addressAndSocial}>
+          <FooterAddress />
+          <FooterFollow />
+        </div>
+
+        <div className={styles.gallery}>
+          <div className={styles.galleryGrid}>
+            <div className={styles.galleryBox}></div>
+            <div className={styles.galleryBox}></div>
+            <div className={styles.galleryBox}></div>
+            <div className={styles.galleryBox}></div>
+          </div>
+        </div>
       </div>
 
       <div className={styles.chips}>
         {chips.map((chip) => (
           <FooterChip key={chip.id} chip={chip} />
         ))}
+      </div>
+
+      <div className={styles.actionRow}>
+        <a href="#" className={styles.actionPill}>Call Us Now</a>
+        <a href="#" className={styles.actionPill}>Book Appoitment</a>
+        <a href="#" className={styles.actionPill}>Mail Us</a>
+        <a href="#" className={styles.actionPill}>Contact & Review</a>
       </div>
 
       <div className={styles.bottom}>

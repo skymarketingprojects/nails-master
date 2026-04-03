@@ -35,8 +35,9 @@
 // };
 import React from "react";
 import styles from "./LocationCard.module.css";
-import type { Location } from "../../../data/locations";
+import type { Location } from "../../../api/types";
 import { FcGoogle } from "react-icons/fc";
+import { FaMapMarkerAlt, FaWhatsapp, FaLocationArrow } from "react-icons/fa";
 import config from "../../../config/config";
 interface Props {
   location: Location;
@@ -45,48 +46,51 @@ interface Props {
 export const LocationCard: React.FC<Props> = ({ location }) => {
   return (
     <article className={styles.card}>
-      <a
-        href={location.link}
-        className={styles.card__link}
-        target="_blank"
-        rel="noopener noreferrer"
-      >
+      <div className={styles.card__imageWrapper}>
         <img
           src={config.BASE_URL + location.icon}
           alt={`${location.title} salon`}
           className={styles.card__image}
         />
-
-        <h3 className={styles.card__title}>{location.title}</h3>
-
-        <div className={styles.card__rating}>
-          <FcGoogle seed={23} className={styles.googleIcon} />
-          <span className={styles.star}>★</span>
-          <span>{location.rating.toFixed(1)} / 5</span>
-        </div>
-        <div className={styles.starsWrapper}>
-        {[...Array(5)].map((_, i) => {
-          const rating = location.rating;
-          if (rating >= i + 1) {
-            return <span key={i} className={styles.starFull}>★</span>;
-          }
-          if (rating > i && rating < i + 1) {
-            return <span key={i} className={styles.starHalf}>★</span>;
-          }
-          return <span key={i} className={styles.starEmpty}>★</span>;
-        })}
       </div>
-      </a>
 
-      {/* OUTLINED VISIT BUTTON */}
-      <a
-        href={`https://wa.me/${location.phone}?text=I+want+to+book+an+appointment`}
-        // target="_blank"
-        // rel="noopener noreferrer"
-        className={styles.card__visitBtn}
-      >
-        {location.phone}
-      </a>
+      <div className={styles.card__infoContainer}>
+        <div className={styles.card__metaRow}>
+          <div className={styles.card__address}>
+            <FaMapMarkerAlt className={styles.metaIconRed} /> 
+            <span>{location.title}</span>
+          </div>
+          <div className={styles.card__phone}>
+            <FaWhatsapp className={styles.metaIconGreen} />
+            <a href={`https://wa.me/91${location.phone}`}>{location.phone}</a>
+          </div>
+        </div>
+
+        <a
+          href={location.link || "#"}
+          className={styles.btnBlack}
+        >
+          <FaMapMarkerAlt /> Visit Branch
+        </a>
+
+        <a
+          href={location.locationlink || "#"}
+          target="_blank"
+          rel="noopener noreferrer"
+          className={styles.btnOutlined}
+        >
+          <FcGoogle /> Review Us
+        </a>
+
+        <a
+          href={location.mapLink || "#"}
+          target="_blank"
+          rel="noopener noreferrer"
+          className={styles.linkDirection}
+        >
+          <FaLocationArrow /> Get Direction
+        </a>
+      </div>
     </article>
   );
 };

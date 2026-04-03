@@ -1,91 +1,57 @@
 .card {
     display: flex;
     flex-direction: column;
-    align-items: center;
     background: #fff;
-    border: 1px solid #e0e0e0;
-    padding: 16px;
-    transition: box-shadow 0.25s ease;
+    border: 1px solid #eee;
+    border-radius: 4px;
+    overflow: hidden;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
 .card:hover {
-    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.08);
+    transform: translateY(-4px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.05);
 }
 
 .card__image {
     width: 100%;
     aspect-ratio: 1 / 1;
     object-fit: cover;
-    margin-bottom: 14px;
+}
+
+.card__info {
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
 .card__title {
     margin: 0;
-    font-size: 18px;
-    font-weight: 500;
+    font-size: 16px;
+    font-weight: 400;
     text-align: center;
-    color: #333;
+    color: #111;
 }
 
 .card__price {
-    margin: 6px 0 14px;
-    font-size: 16px;
+    margin: 8px 0 16px;
+    font-size: 14px;
     color: #555;
 }
 
 .card__button {
-    padding: 8px 20px;
-    background: #1c1c1c;
+    padding: 10px 32px;
+    background: #111;
     color: #fff;
     text-decoration: none;
     font-size: 13px;
-    border-radius: 4px;
-    transition: background 0.2s ease, color 0.2s ease;
+    font-weight: 500;
+    border-radius: 6px;
+    transition: background 0.2s ease;
     display: inline-block;
 }
 
-/* kill default link colors */
-.card__button:link,
-.card__button:visited,
-.card__button:active,
-.card__button:focus {
-    color: #fff;
-    text-decoration: none;
-}
-
-/* controlled hover */
 .card__button:hover {
-    background: #000;
-    color: #fff;
-}
-.card__actions {
-    display: flex;
-    gap: 10px;
-    margin-top: auto;
-}
-.card__buttonOutline {
-    padding: 8px 20px;
-    background: transparent;
-    color: #1c1c1c;
-    border: 1px solid #1c1c1c;
-    font-size: 13px;
-    border-radius: 4px;
-    text-decoration: none;
-    transition: background 0.2s ease, color 0.2s ease;
-    display: inline-block;
-}
-
-/* remove all default link styles */
-.card__buttonOutline:link,
-.card__buttonOutline:visited,
-.card__buttonOutline:active,
-.card__buttonOutline:focus {
-    color: #1c1c1c;
-    text-decoration: none;
-}
-
-/* hover */
-.card__buttonOutline:hover {
-    background: #1c1c1c;
-    color: #fff;
+    background: #333;
 }

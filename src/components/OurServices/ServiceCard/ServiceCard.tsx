@@ -23,11 +23,10 @@ export const ServiceCard: React.FC<Props> = ({ service }) => {
         className={styles.card__image}
       />
 
-      <h3 className={styles.card__title}>{service.title}</h3>
+      <div className={styles.card__info}>
+        <h3 className={styles.card__title}>{service.title}</h3>
+        <p className={styles.card__price}>₹{service.price}/-</p>
 
-      <p className={styles.card__price}>Starts from ₹{service.price}/-</p>
-
-      <div className={styles.card__actions}>
         <a
           href={waLink}
           target="_blank"
@@ -35,14 +34,6 @@ export const ServiceCard: React.FC<Props> = ({ service }) => {
           className={styles.card__button}
         >
           Book Now
-        </a>
-
-        <a
-          href={service.brochure}
-          download="Brochure.pdf"
-          className={styles.card__buttonOutline}
-        >
-          Brochure
         </a>
       </div>
     </article>
