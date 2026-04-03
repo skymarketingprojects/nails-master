@@ -12,6 +12,29 @@ const BlogDetailPage: React.FC = () => {
   const [moreBlogs, setMoreBlogs] = useState<BlogItem[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
 
+  // Helper function to ensure full image URLs
+  const getFullUrl = (path: string | null | undefined) => {
+    if (!path) return "";
+    if (path.startsWith("http")) return path;
+    const baseUrl = config.BASE_URL.replace(/\/$/, ""); // Remove trailing slash if any
+    const relativePath = path.startsWith("/") ? path : `/${path}`; // Ensure leading slash
+    return `${baseUrl}${relativePath}`;
+  };
+
+  // Helper function to strip HTML tags for SEO
+  const stripHtml = (html: string) => {
+    return html.replace(/<\/?[^>]+(>|$)/g, "").trim();
+  };
+
+  // Helper function to prefix relative URLs in HTML content
+  const processHtmlContent = (html: string) => {
+    const baseUrl = config.BASE_URL.replace(/\/$/, "");
+    return html.replace(
+      /(src|href)=["'](\/media\/[^"']+)["']/g,
+      `$1="${baseUrl}$2"`
+    );
+  };
+
   useEffect(() => {
     const fetchBlogData = async () => {
       // Guard clause: Early return if no slug
@@ -52,9 +75,9 @@ const BlogDetailPage: React.FC = () => {
     );
   }
 
-  const blogImage = blog.image.startsWith("http")
-    ? blog.image
-    : config.BASE_URL.slice(0, -1) + blog.image;
+  const blogImage = getFullUrl(blog.image);
+  const cleanDescription = stripHtml(blog.description);
+  const processedContent = processHtmlContent(blog.description);
 
   const formattedDate = new Date(blog.timestamp).toLocaleDateString('en-GB', {
     day: '2-digit',
@@ -66,7 +89,7 @@ const BlogDetailPage: React.FC = () => {
     <div className={styles.container}>
       <SEO 
         title={blog.title} 
-        description={blog.description.substring(0, 160)}
+        description={cleanDescription.substring(0, 160)}
       />
       <header className={styles.header}>
         <img src={blogImage} alt={blog.title} className={styles.heroImage} />
@@ -79,7 +102,7 @@ const BlogDetailPage: React.FC = () => {
         <h1>{blog.title}</h1>
         <div 
           className={styles.content}
-          dangerouslySetInnerHTML={{ __html: blog.description }}
+          dangerouslySetInnerHTML={{ __html: processedContent }}
         />
       </main>
 
@@ -88,9 +111,7 @@ const BlogDetailPage: React.FC = () => {
           <h2>Explore More Blogs</h2>
           <div className={styles.moreBlogsGrid}>
             {moreBlogs.map((b) => {
-              const moreBlogImg = b.image.startsWith("http")
-                ? b.image
-                : config.BASE_URL.slice(0, -1) + b.image;
+              const moreBlogImg = getFullUrl(b.image);
 
               return (
                 <div key={b.id} className={styles.smallCard}>

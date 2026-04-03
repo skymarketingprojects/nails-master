@@ -13,6 +13,20 @@ const BlogListPage: React.FC = () => {
   const [currentPage, setCurrentPage] = useState<number>(1);
   const [hasMore, setHasMore] = useState<boolean>(false);
 
+  // Helper function to ensure full image URLs
+  const getFullUrl = (path: string | null | undefined) => {
+    if (!path) return "";
+    if (path.startsWith("http")) return path;
+    const baseUrl = config.BASE_URL.replace(/\/$/, ""); // Remove trailing slash if any
+    const relativePath = path.startsWith("/") ? path : `/${path}`; // Ensure leading slash
+    return `${baseUrl}${relativePath}`;
+  };
+
+  // Helper function to strip HTML tags for short description
+  const stripHtml = (html: string) => {
+    return html.replace(/<\/?[^>]+(>|$)/g, "").trim();
+  };
+
   const fetchBlogs = async (page: number) => {
     try {
       setLoading(true);
@@ -60,16 +74,15 @@ const BlogListPage: React.FC = () => {
         ) : (
           <div className={styles.grid}>
             {blogs.map((blog) => {
-              const imgSrc = blog.image.startsWith("http")
-                ? blog.image
-                : config.BASE_URL.slice(0, -1) + blog.image;
+              const imgSrc = getFullUrl(blog.image);
+              const cleanDescription = stripHtml(blog.description);
 
               return (
                 <div key={blog.id} className={styles.card}>
                   <img src={imgSrc} alt={blog.title} className={styles.thumbnail} />
                   <div className={styles.cardContent}>
                     <h3>{blog.title}</h3>
-                    <p className={styles.shortDescription}>{blog.description}</p>
+                    <p className={styles.shortDescription}>{cleanDescription}</p>
                     <div className={styles.cardFooter}>
                       <span className={styles.author}>By {blog.author}</span>
                       <Link to={`/blog/${blog.slug}`} className={styles.readMore}>
