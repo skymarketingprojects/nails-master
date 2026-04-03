@@ -1,0 +1,106 @@
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 80px 20px;
+  font-family: 'Outfit', sans-serif;
+  color: #333;
+}
+
+.header {
+  margin-bottom: 50px;
+  position: relative;
+}
+
+.heroImage {
+  width: 100%;
+  max-height: 500px;
+  object-fit: cover;
+  border-radius: 8px;
+  margin-bottom: 20px;
+}
+
+.meta {
+  display: flex;
+  justify-content: space-between;
+  font-size: 14px;
+  color: #666;
+  border-bottom: 1px solid #eee;
+  padding-bottom: 15px;
+}
+
+.main {
+  max-width: 800px;
+  margin: 0 auto 80px auto;
+}
+
+.main h1 {
+  font-size: 48px;
+  font-weight: 500;
+  margin-bottom: 30px;
+  color: #222;
+  text-align: left;
+}
+
+.main p {
+  font-size: 18px;
+  line-height: 1.8;
+  color: #444;
+  margin-bottom: 25px;
+  font-weight: 300;
+}
+
+.moreBlogs {
+  border-top: 1px solid #111;
+  padding-top: 60px;
+}
+
+.moreBlogs h2 {
+  font-size: 32px;
+  font-weight: 500;
+  margin-bottom: 40px;
+  color: #222;
+  text-align: center;
+}
+
+.moreBlogsGrid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 30px;
+}
+
+.smallCard {
+  text-align: center;
+  border: 1px solid #eee;
+}
+
+.smallCard img {
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  object-fit: cover;
+}
+
+.smallCard h3 {
+  font-size: 18px;
+  margin: 20px 0 10px 0;
+  padding: 0 10px;
+}
+
+.smallCard a {
+  display: inline-block;
+  background: #111;
+  color: #fff;
+  padding: 8px 25px;
+  font-size: 14px;
+  text-decoration: none;
+  margin-bottom: 20px;
+}
+
+@media (max-width: 768px) {
+  .main h1 {
+    font-size: 32px;
+  }
+  
+  .moreBlogsGrid {
+    grid-template-columns: 1fr;
+  }
+}

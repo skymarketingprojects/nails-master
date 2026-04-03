@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
 import styles from "./Footer.module.css";
 import { footerChips as staticChips } from "../../data/footer";
 import { FooterChip } from "./FooterChip/FooterChip";
@@ -41,11 +42,11 @@ export const Footer: React.FC = () => {
         <div className={styles.menu}>
           <h4>MENU</h4>
           <ul>
-            <li>Home</li>
-            <li>Treatments</li>
-            <li>Problems</li>
-            <li>Blogs</li>
-            <li>Contact</li>
+            <li><Link to="/">Home</Link></li>
+            <li><Link to="/#services">Treatments</Link></li>
+            <li><Link to="/#problems">Problems</Link></li>
+            <li><Link to="/blogs">Blogs</Link></li>
+            <li><Link to="/contact">Contact</Link></li>
           </ul>
         </div>
 

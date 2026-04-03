@@ -41,6 +41,9 @@ export interface Location {
   images: string[];
   locationlink: string;
   mapLink: string;
+  mon_sat_hours?: string;
+  sun_hours?: string;
+  brochure?: string;
 }
 
 export type { Service, Testimonial, FooterAddressData, FooterChipData };

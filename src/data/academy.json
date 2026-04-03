@@ -1,0 +1,36 @@
+{
+  "heroImage": "",
+  "buttons": {
+    "downloadBrochure": {
+      "label": "Download Brochure",
+      "link": "#"
+    },
+    "apply": {
+      "label": "Apply For Joining",
+      "link": "#"
+    }
+  },
+  "benefitsSectionTitle": "Why Join Nails Master",
+  "benefits": [
+    {
+      "title": "Proven Business Model",
+      "description": "Our Tested Salon System helps you start the scale quickly"
+    },
+    {
+      "title": "High Demand Industry",
+      "description": "Nail and beauty services are growing rapidly."
+    },
+    {
+      "title": "Complete Training Support",
+      "description": "We train your staff and guide you step by step."
+    }
+  ],
+  "gallery": [
+    "", 
+    "", 
+    "", 
+    "", 
+    "", 
+    ""
+  ]
+}
