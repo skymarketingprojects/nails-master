@@ -1,43 +1,110 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { useParams, Link } from 'react-router-dom';
-import { blogs } from '../../data/blogs';
 import styles from './BlogDetailPage.module.css';
+import { api } from "../../api/baseApi";
+import { type BlogDetail, type BlogItem } from "../../api/types";
+import config from "../../config/config";
+import SEO from "../../components/SEO/SEO";
 
 const BlogDetailPage: React.FC = () => {
   const { slug } = useParams<{ slug: string }>();
-  const blog = blogs.find((b) => b.slug === slug);
+  const [blog, setBlog] = useState<BlogDetail | null>(null);
+  const [moreBlogs, setMoreBlogs] = useState<BlogItem[]>([]);
+  const [loading, setLoading] = useState<boolean>(true);
 
-  if (!blog) {
-    return <div>Blog not found</div>;
+  useEffect(() => {
+    const fetchBlogData = async () => {
+      // Guard clause: Early return if no slug
+      if (!slug) return;
+
+      try {
+        setLoading(true);
+        const data = await api.getBlogDetail(slug);
+        setBlog(data);
+
+        // Fetch more blogs for the "Explore More" section (limit 3)
+        const moreData = await api.getBlogs(1, 3);
+        // Filter out the current blog from the more section
+        setMoreBlogs(moreData.results.filter(b => b.slug !== slug).slice(0, 3));
+      } catch (error) {
+        console.error("Failed to fetch blog detail:", error);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchBlogData();
+    // Scroll to top on slug change
+    window.scrollTo(0, 0);
+  }, [slug]);
+
+  if (loading) {
+    return <div className={styles.loading}>Loading blog...</div>;
   }
+
+  // Guard clause: Blog not found
+  if (!blog) {
+    return (
+      <div className={styles.notFound}>
+        <h2>Blog not found</h2>
+        <Link to="/blogs">Back to Blogs</Link>
+      </div>
+    );
+  }
+
+  const blogImage = blog.image.startsWith("http")
+    ? blog.image
+    : config.BASE_URL.slice(0, -1) + blog.image;
+
+  const formattedDate = new Date(blog.timestamp).toLocaleDateString('en-GB', {
+    day: '2-digit',
+    month: 'long',
+    year: 'numeric'
+  });
 
   return (
     <div className={styles.container}>
+      <SEO 
+        title={blog.title} 
+        description={blog.description.substring(0, 160)}
+      />
       <header className={styles.header}>
-        <img src={blog.thumbnail} alt={blog.title} className={styles.heroImage} />
+        <img src={blogImage} alt={blog.title} className={styles.heroImage} />
         <div className={styles.meta}>
-          <span>{blog.date}</span>
+          <span>{formattedDate}</span>
           <span>{blog.author}</span>
         </div>
       </header>
       <main className={styles.main}>
         <h1>{blog.title}</h1>
-        {blog.content.map((paragraph, index) => (
-          <p key={index}>{paragraph}</p>
-        ))}
+        <div 
+          className={styles.content}
+          dangerouslySetInnerHTML={{ __html: blog.description }}
+        />
       </main>
-      <section className={styles.moreBlogs}>
-        <h2>Explore More Blogs</h2>
-        <div className={styles.moreBlogsGrid}>
-          {blogs.slice(0, 3).map((b) => (
-            <div key={b.id} className={styles.smallCard}>
-              <img src={b.thumbnail} alt={b.title} />
-              <h3>{b.title}</h3>
-              <Link to={`/blog/${b.slug}`}>Read More</Link>
-            </div>
-          ))}
-        </div>
-      </section>
+
+      {moreBlogs.length > 0 && (
+        <section className={styles.moreBlogs}>
+          <h2>Explore More Blogs</h2>
+          <div className={styles.moreBlogsGrid}>
+            {moreBlogs.map((b) => {
+              const moreBlogImg = b.image.startsWith("http")
+                ? b.image
+                : config.BASE_URL.slice(0, -1) + b.image;
+
+              return (
+                <div key={b.id} className={styles.smallCard}>
+                  <img src={moreBlogImg} alt={b.title} />
+                  <div className={styles.smallCardContent}>
+                    <h3>{b.title}</h3>
+                    <Link to={`/blog/${b.slug}`}>Read More</Link>
+                  </div>
+                </div>
+              );
+            })}
+          </div>
+        </section>
+      )}
     </div>
   );
 };

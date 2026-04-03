@@ -12,6 +12,9 @@ import {
   type Category,
   type GalleryItem,
   type Brochure,
+  type BlogItem,
+  type BlogDetail,
+  type BlogListResponse,
 } from "./types";
 
 import config from "../config/config";
@@ -61,4 +64,7 @@ export const api = {
   getCategories: () => apiFetch<Category[]>("categories/"),
   getGallery: (page: string) => apiFetch<GalleryItem[]>(`gallery/?page=${page}`),
   getBrochure: (name: string) => apiFetch<Brochure>(`broucher/${name}/`),
+  getBlogs: (page: number = 1, pageSize: number = 6) => 
+    apiFetch<BlogListResponse>(`blogs/?page=${page}&page_size=${pageSize}`),
+  getBlogDetail: (slug: string) => apiFetch<BlogDetail>(`blog/${slug}/`),
 };

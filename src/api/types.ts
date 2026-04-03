@@ -63,5 +63,28 @@ export interface Brochure {
   broucher: string;
 }
 
+export interface BlogItem {
+  id: number;
+  title: string;
+  slug: string;
+  image: string;
+  description: string;
+  author: string;
+  timestamp: string;
+}
+
+export interface BlogDetail extends BlogItem {
+  updatedAt: string;
+}
+
+export interface BlogListResponse {
+  total_pages: number;
+  current_page: number;
+  has_next: boolean;
+  has_previous: boolean;
+  count: number;
+  results: BlogItem[];
+}
+
 export type { Service, Testimonial, FooterAddressData, FooterChipData };
 
