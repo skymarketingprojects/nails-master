@@ -2,5 +2,5 @@ import { InfoPageTemplate } from "../components/InfoPageTemplate/InfoPageTemplat
 import franchiseData from "../data/franchise.json";
 
 export default function FranchisePage() {
-  return <InfoPageTemplate data={franchiseData} />;
+  return <InfoPageTemplate data={franchiseData} pageName="franchise" />;
 }

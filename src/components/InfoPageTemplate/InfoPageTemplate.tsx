@@ -1,6 +1,9 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import styles from "./InfoPageTemplate.module.css";
 import heroPlaceholder from "../../assets/banner/Home-Banner.jpeg"; // Fallback image if JSON is empty
+import { api } from "../../api/baseApi";
+import config from "../../config/config";
+import { type GalleryItem } from "../../api/types";
 
 export interface InfoPageData {
   heroImage: string;
@@ -24,9 +27,32 @@ export interface InfoPageData {
 
 interface Props {
   data: InfoPageData;
+  pageName: string;
 }
 
-export const InfoPageTemplate: React.FC<Props> = ({ data }) => {
+export const InfoPageTemplate: React.FC<Props> = ({ data, pageName }) => {
+  const [galleryImages, setGalleryImages] = useState<string[]>(data.gallery);
+
+  useEffect(() => {
+    const fetchGallery = async () => {
+      try {
+        const result: GalleryItem[] = await api.getGallery(pageName);
+        if (result && result.length > 0) {
+          const fullImageUrls = result.map(item => 
+            item.image.startsWith("http") 
+              ? item.image 
+              : `${config.BASE_URL.slice(0, -1)}${item.image}`
+          );
+          setGalleryImages(fullImageUrls);
+        }
+      } catch (error) {
+        console.error("Failed to fetch gallery images:", error);
+      }
+    };
+
+    fetchGallery();
+  }, [pageName]);
+
   return (
     <div className={styles.pageContainer}>
       {/* Hero Section */}
@@ -66,7 +92,7 @@ export const InfoPageTemplate: React.FC<Props> = ({ data }) => {
       {/* Gallery Section */}
       <section className={styles.gallerySection}>
         <div className={styles.galleryGrid}>
-          {data.gallery.map((imgSrc, index) => (
+          {galleryImages.map((imgSrc, index) => (
             <div key={index} className={styles.galleryBox}>
               {imgSrc ? (
                 <img src={imgSrc} alt={`Gallery ${index + 1}`} className={styles.galleryImg} />

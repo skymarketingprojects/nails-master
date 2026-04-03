@@ -31,7 +31,7 @@ import { api } from "../api/baseApi";
 import { type Location } from "../api/types";
 import { ContactHero } from "../components/ContactHero/ContactHero";
 import { ContactInfoSection } from "../components/ContactInfoSection/ContactInfoSection";
-import { ContactServicesSection } from "../components/ContactServicesSection/ContactServicesSection";
+import { OurServices } from "../components/OurServices/OurServices";
 import { ContactFormSection } from "../components/ContactFormSection/ContactFormSection";
 import { ContactMapSection } from "../components/ContactMapSection/ContactMapSection";
 import { TestimonialSection } from "../components/TestimonialSection/TestimonialSection";
@@ -43,8 +43,15 @@ export default function ContactPage() {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
+    // Reset state when navigating between locations
+    setLocation(null);
+    setLoading(true);
+
     const fetchLocation = async () => {
-      if (!slug) return;
+      if (!slug) {
+        setLoading(false);
+        return;
+      }
       try {
         const data = await api.getLocation(slug);
         setLocation(data);
@@ -57,8 +64,8 @@ export default function ContactPage() {
     fetchLocation();
   }, [slug]);
 
-  if (loading) return null;
   if (!location) {
+    if (loading) return null;
     return <div>Location not found</div>;
   }
 
@@ -74,15 +81,14 @@ export default function ContactPage() {
       <ContactHero 
         title={location.title} 
         image={location.image}
-        mon_sat_hours={location.mon_sat_hours}
-        sun_hours={location.sun_hours}
+        timing={location.timing}
       />
 
       {/* 2. Info & Actions */}
       <ContactInfoSection location={location} />
 
-      {/* 3. Services Gallery */}
-      <ContactServicesSection location={location} />
+      {/* 3. Services */}
+      <OurServices locationSlug={location.link} />
 
       {/* 4. Booking Section */}
       <ContactFormSection />

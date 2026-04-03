@@ -4,6 +4,8 @@ export interface Testimonial {
   feedback: string;
   designation?: string;
   image?: string;
+  video?: string;
+  defaultImage?: string | null;
 }
 
 /**

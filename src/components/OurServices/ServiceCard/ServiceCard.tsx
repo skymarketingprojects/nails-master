@@ -18,7 +18,7 @@ export const ServiceCard: React.FC<Props> = ({ service }) => {
   return (
     <article className={styles.card}>
       <img
-        src={config.BASE_URL + service.image}
+        src={config.BASE_URL.slice(0, -1) + service.image}
         alt={service.title}
         className={styles.card__image}
       />

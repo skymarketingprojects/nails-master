@@ -61,7 +61,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
         <a href={displayLink} target="_blank" rel="noopener noreferrer">
           {defaultImage ? (
             <img
-              src={config.BASE_URL + defaultImage}
+              src={config.BASE_URL.slice(0, -1) + defaultImage}
               alt={defaultAlt}
               className={styles.hero__image}
             />
@@ -77,7 +77,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
         <>
         {defaultImage ? (
             <img
-              src={config.BASE_URL + defaultImage}
+              src={config.BASE_URL.slice(0, -1) + defaultImage}
               alt={defaultAlt}
               className={styles.hero__image}
             />

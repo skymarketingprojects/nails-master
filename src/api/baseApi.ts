@@ -9,6 +9,9 @@ import {
   type FooterAddressData,
   type FooterChipData,
   type Location,
+  type Category,
+  type GalleryItem,
+  type Brochure,
 } from "./types";
 
 import config from "../config/config";
@@ -31,7 +34,7 @@ async function apiFetch<T>(endpoint: string, options: RequestInit = {}): Promise
 
   const result: ApiResponse<T> = await response.json();
 
-  if (result.code !== 200) {
+  if (result.success === "error" || result.code !== 200) {
     throw new Error(result.message || "API error");
   }
 
@@ -42,12 +45,20 @@ export const api = {
   getSocialMedia: () => apiFetch<SocialMedia[]>("socialmedia/"),
   getFooterAddress: () => apiFetch<FooterAddressData>("footer/address"),
   getFooterChips: () => apiFetch<FooterChipData[]>("footer/chips"),
-  getServices: () => apiFetch<Service[]>("services/"),
+  getServices: (params?: { location?: string; category?: string }) => {
+    const query = new URLSearchParams();
+    if (params?.location) query.set("location", params.location);
+    if (params?.category) query.set("category", params.category);
+    const qs = query.toString();
+    return apiFetch<Service[]>(`services/${qs ? `?${qs}` : ""}`);
+  },
   getTestimonials: () => apiFetch<Testimonial[]>("testimonials/"),
   getHeroBanners: (page: string) => apiFetch<HeroBanner[]>(`herobanners/?page=${page}`),
   getTopBar: () => apiFetch<TopBar[]>("topbar/"),
   getContact: () => apiFetch<Contact>("contact/"),
   getLocations: () => apiFetch<Location[]>("location/"),
   getLocation: (slug: string) => apiFetch<Location>(`location/${slug}/`),
+  getCategories: () => apiFetch<Category[]>("categories/"),
+  getGallery: (page: string) => apiFetch<GalleryItem[]>(`gallery/?page=${page}`),
+  getBrochure: (name: string) => apiFetch<Brochure>(`broucher/${name}/`),
 };
-

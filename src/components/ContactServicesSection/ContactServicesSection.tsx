@@ -2,18 +2,22 @@ import React, { useState } from "react";
 import styles from "./ContactServicesSection.module.css";
 import { type Location } from "../../api/types";
 import config from "../../config/config";
+import { useServices } from "../../hooks/useServices";
 
 interface ContactServicesSectionProps {
   location: Location;
 }
 
 export const ContactServicesSection: React.FC<ContactServicesSectionProps> = ({ location }) => {
-  const [activeTab, setActiveTab] = useState("View All");
+  const { tabs, activeTab, setActiveTab, filteredServices } = useServices(location.link);
+  const [visibleCount, setVisibleCount] = useState(8);
 
-  const tabs = ["View All", "Nail extension", "Hair color", "Acrylic gel", "Makeup"];
+  const handleTabChange = (tab: string) => {
+    setActiveTab(tab);
+    setVisibleCount(8); // Reset on tab change
+  };
 
-  // Use the location images for the grid
-  const displayImages = location.images?.slice(0, 8) || [];
+  const displayedServices = filteredServices.slice(0, visibleCount);
 
   return (
     <section className={styles.section}>
@@ -27,7 +31,7 @@ export const ContactServicesSection: React.FC<ContactServicesSectionProps> = ({ 
               <button
                 key={tab}
                 className={`${styles.tab} ${activeTab === tab ? styles.tabActive : ""}`}
-                onClick={() => setActiveTab(tab)}
+                onClick={() => handleTabChange(tab)}
               >
                 {tab}
               </button>
@@ -35,23 +39,44 @@ export const ContactServicesSection: React.FC<ContactServicesSectionProps> = ({ 
           </div>
         </div>
 
-        {/* Image Grid */}
-        <div className={styles.grid}>
-          {displayImages.map((img, index) => (
-            <div key={index} className={styles.gridItem}>
-              <img
-                src={config.BASE_URL + img}
-                alt={`Service ${index + 1}`}
-                className={styles.image}
-              />
+        {/* Content */}
+        {filteredServices.length === 0 ? (
+          <p className={styles.emptyMessage}>No services available for this category.</p>
+        ) : (
+          <>
+            <div className={styles.grid}>
+              {displayedServices.map((service, index) => {
+                const imgSrc = service.image.startsWith("http")
+                  ? service.image
+                  : config.BASE_URL.slice(0, -1) + service.image;
+
+                return (
+                  <div key={service.id || index} className={styles.gridItem}>
+                    <img
+                      src={imgSrc}
+                      alt={service.title || `Service ${index + 1}`}
+                      className={styles.image}
+                      title={service.title}
+                    />
+                  </div>
+                );
+              })}
             </div>
-          ))}
-          {/* Fill remaining slots if less than 8 images */}
-          {Array.from({ length: Math.max(0, 8 - displayImages.length) }).map((_, index) => (
-             <div key={`placeholder-${index}`} className={styles.gridItemPlaceholder}></div>
-          ))}
-        </div>
+
+            {visibleCount < filteredServices.length && (
+              <div className={styles.showMoreWrapper}>
+                <button
+                  className={styles.showMoreBtn}
+                  onClick={() => setVisibleCount((prev) => prev + 8)}
+                >
+                  Show More
+                </button>
+              </div>
+            )}
+          </>
+        )}
       </div>
     </section>
   );
 };
+

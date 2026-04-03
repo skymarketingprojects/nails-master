@@ -2,5 +2,5 @@ import { InfoPageTemplate } from "../components/InfoPageTemplate/InfoPageTemplat
 import academyData from "../data/academy.json";
 
 export default function AcademyPage() {
-  return <InfoPageTemplate data={academyData} />;
+  return <InfoPageTemplate data={academyData} pageName="academy" />;
 }

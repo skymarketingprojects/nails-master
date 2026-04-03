@@ -73,6 +73,9 @@ export const SalonSection: React.FC = () => {
   const [locations, setLocations] = useState<Location[]>([]);
   const [loading, setLoading] = useState(true);
 
+  const [currentPage, setCurrentPage] = useState(0);
+  const [itemsPerView, setItemsPerView] = useState(3);
+
   useEffect(() => {
     const fetchLocations = async () => {
       try {
@@ -87,7 +90,41 @@ export const SalonSection: React.FC = () => {
     fetchLocations();
   }, []);
 
+  useEffect(() => {
+    const updateLayout = () => {
+      const width = window.innerWidth;
+      if (width >= 1200) setItemsPerView(3);
+      else if (width >= 768) setItemsPerView(2);
+      else setItemsPerView(1);
+    };
+
+    updateLayout();
+    window.addEventListener("resize", updateLayout);
+    return () => window.removeEventListener("resize", updateLayout);
+  }, []);
+
+  const totalPages = Math.ceil(locations.length / itemsPerView);
+
+  useEffect(() => {
+    if (currentPage >= totalPages && totalPages > 0) {
+      setCurrentPage(0);
+    }
+  }, [itemsPerView, totalPages, currentPage]);
+
   if (loading) return null;
+
+  const startIndex = currentPage * itemsPerView;
+  const visibleLocations = locations.slice(startIndex, startIndex + itemsPerView);
+
+  const goToPage = (page: number) => {
+    let targetPage = page;
+    if (page < 0) targetPage = totalPages - 1;
+    if (page >= totalPages) targetPage = 0;
+    setCurrentPage(targetPage);
+  };
+
+  const goPrev = () => goToPage(currentPage - 1);
+  const goNext = () => goToPage(currentPage + 1);
 
   return (
     <section
@@ -98,18 +135,42 @@ export const SalonSection: React.FC = () => {
       {/* Heading */}
       <div className={styles.section__header}>
         <h2 id="salon-heading" className={styles.section__title}>
-          Our Salons
+          Our Salons:
         </h2>
       </div>
 
       {/* Cards Container */}
       <div className={styles.section__carousel}>
         <div className={styles.section__cards}>
-          {locations.map((loc) => (
+          {visibleLocations.map((loc) => (
             <LocationCard key={loc.id} location={loc} />
           ))}
         </div>
       </div>
+
+      {/* Pagination Controls */}
+      {totalPages > 1 && (
+        <div className={styles.paginationRow}>
+          <button
+            className={styles.arrowBtn}
+            onClick={goPrev}
+            aria-label="Previous locations"
+          >
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
+            </svg>
+          </button>
+          <button
+            className={styles.arrowBtn}
+            onClick={goNext}
+            aria-label="Next locations"
+          >
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+            </svg>
+          </button>
+        </div>
+      )}
 
       {/* Message Section */}
       <div className={styles.section__message}>

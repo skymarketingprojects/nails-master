@@ -1,32 +1,16 @@
 import React, { useState, useEffect } from "react";
 import styles from "./OurServices.module.css";
-import { services as staticServices } from "../../data/services";
 import { ServiceCard } from "./ServiceCard/ServiceCard";
-import { api } from "../../api/baseApi";
-import type { Service } from "../../api/types";
+import { useServices } from "../../hooks/useServices";
 
-export const OurServices: React.FC = () => {
-  const [services, setServices] = useState<Service[]>(staticServices);
+interface OurServicesProps {
+  locationSlug?: string;
+}
+
+export const OurServices: React.FC<OurServicesProps> = ({ locationSlug }) => {
+  const { tabs, activeTab, setActiveTab, loading, filteredServices, services } = useServices(locationSlug);
   const [visibleCount, setVisibleCount] = useState(6);
   const [increment, setIncrement] = useState(3);
-  const [loading, setLoading] = useState(true);
-
-  useEffect(() => {
-    const fetchServices = async () => {
-      try {
-        const data = await api.getServices();
-        if (data && data.length > 0) {
-          setServices(data);
-        }
-      } catch (error) {
-        console.error("Failed to fetch services:", error);
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    fetchServices();
-  }, []);
 
   useEffect(() => {
     const updateIncrement = () => {
@@ -46,14 +30,16 @@ export const OurServices: React.FC = () => {
     return () => window.removeEventListener("resize", updateIncrement);
   }, []);
 
+  const handleTabChange = (tabName: string) => {
+    setActiveTab(tabName);
+    setVisibleCount(increment); // Reset visible count on tab change
+  };
+
   const handleViewAll = () => {
     setVisibleCount((prev) => prev + increment);
   };
 
   if (loading && services.length === 0) return null;
-
-  const TABS = ["View All", "Nail extension", "Hair color", "Acrylic gel", "Makeup"];
-  const [activeTab, setActiveTab] = useState("View All");
 
   return (
     <section id="services" className={styles.section} aria-labelledby="services-heading">
@@ -63,11 +49,11 @@ export const OurServices: React.FC = () => {
 
       <div className={styles.section__tabsWrapper}>
         <div className={styles.section__tabs}>
-          {TABS.map((tab) => (
+          {tabs.map((tab) => (
             <button
               key={tab}
               className={`${styles.tabBtn} ${activeTab === tab ? styles.tabBtnActive : ""}`}
-              onClick={() => setActiveTab(tab)}
+              onClick={() => handleTabChange(tab)}
             >
               {tab}
             </button>
@@ -76,12 +62,12 @@ export const OurServices: React.FC = () => {
       </div>
 
       <div className={styles.section__grid}>
-        {services.slice(0, visibleCount).map((service) => (
+        {filteredServices.slice(0, visibleCount).map((service) => (
           <ServiceCard key={service.id} service={service} />
         ))}
       </div>
 
-      {visibleCount < services.length && (
+      {visibleCount < filteredServices.length && (
         <div className={styles.section__footer}>
           <button
             onClick={handleViewAll}

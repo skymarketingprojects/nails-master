@@ -54,7 +54,7 @@ export const ContactInfoSection: React.FC<ContactInfoSectionProps> = ({ location
               {location.images?.map((img, index) => (
                 <img
                   key={index}
-                  src={config.BASE_URL + img}
+                  src={config.BASE_URL.slice(0, -1) + img}
                   alt={`${location.title} ${index + 1}`}
                   className={styles.carouselImage}
                 />
@@ -82,7 +82,7 @@ export const ContactInfoSection: React.FC<ContactInfoSectionProps> = ({ location
           <div className={styles.actionsBox}>
             {/* Download Brochure */}
             {location.brochure && (
-               <a href={config.BASE_URL + location.brochure} target="_blank" rel="noopener noreferrer" className={styles.btnBrochure}>
+               <a href={config.BASE_URL.slice(0, -1) + location.brochure} target="_blank" rel="noopener noreferrer" className={styles.btnBrochure}>
                  <FaDownload className={styles.btnIcon} />
                  Download Brochure
                </a>

@@ -48,7 +48,7 @@ export const LocationCard: React.FC<Props> = ({ location }) => {
     <article className={styles.card}>
       <div className={styles.card__imageWrapper}>
         <img
-          src={config.BASE_URL + location.icon}
+          src={config.BASE_URL.slice(0, -1) + location.icon}
           alt={`${location.title} salon`}
           className={styles.card__image}
         />
