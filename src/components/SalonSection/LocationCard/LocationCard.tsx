@@ -37,7 +37,7 @@ import React from "react";
 import styles from "./LocationCard.module.css";
 import type { Location } from "../../../data/locations";
 import { FcGoogle } from "react-icons/fc";
-
+import config from "../../../config/config";
 interface Props {
   location: Location;
 }
@@ -52,7 +52,7 @@ export const LocationCard: React.FC<Props> = ({ location }) => {
         rel="noopener noreferrer"
       >
         <img
-          src={location.icon}
+          src={config.BASE_URL + location.icon}
           alt={`${location.title} salon`}
           className={styles.card__image}
         />

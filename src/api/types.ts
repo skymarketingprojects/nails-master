@@ -28,4 +28,20 @@ export interface Contact {
   phone: string;
 }
 
+export interface Location {
+  id: number;
+  title: string;
+  image: string;
+  icon: string;
+  rating: number;
+  link: string;
+  description?: string;
+  phone: string;
+  email: string;
+  images: string[];
+  locationlink: string;
+  mapLink: string;
+}
+
 export type { Service, Testimonial, FooterAddressData, FooterChipData };
+

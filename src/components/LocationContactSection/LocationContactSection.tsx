@@ -5,7 +5,7 @@ import { FcGoogle } from "react-icons/fc";
 import { FaPhoneAlt } from "react-icons/fa";
 import { MdEmail } from "react-icons/md";
 import React, { useEffect, useRef, useState } from "react";
-
+import config from "../../config/config";
 interface Props {
   location: Location;
 }
@@ -79,7 +79,7 @@ export const LocationContactSection: React.FC<Props> = ({ location }) => {
               {location.images?.map((img, index) => (
                 <img
                   key={index}
-                  src={img}
+                  src={config.BASE_URL + img}
                   alt={`${location.title} gallery ${index + 1}`}
                   className={styles.image}
                 />

@@ -63,12 +63,32 @@
 //     </section>
 //   );
 // };
-import React from "react";
+import React, { useEffect, useState } from "react";
 import styles from "./SalonSection.module.css";
-import { locations } from "../../data/locations";
+import { api } from "../../api/baseApi";
+import { type Location } from "../../api/types";
 import { LocationCard } from "./LocationCard/LocationCard";
 
 export const SalonSection: React.FC = () => {
+  const [locations, setLocations] = useState<Location[]>([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const fetchLocations = async () => {
+      try {
+        const data = await api.getLocations();
+        setLocations(data);
+      } catch (error) {
+        console.error("Failed to fetch locations:", error);
+      } finally {
+        setLoading(false);
+      }
+    };
+    fetchLocations();
+  }, []);
+
+  if (loading) return null;
+
   return (
     <section
       id="about"
@@ -102,3 +122,4 @@ export const SalonSection: React.FC = () => {
     </section>
   );
 };
+

@@ -2,7 +2,7 @@ import React from "react";
 import styles from "./ServiceCard.module.css";
 import type { Service } from "../../../data/services";
 import { useContact } from "../../../context/ContactContext";
-
+import config from "../../../config/config";
 interface Props {
   service: Service;
 }
@@ -18,7 +18,7 @@ export const ServiceCard: React.FC<Props> = ({ service }) => {
   return (
     <article className={styles.card}>
       <img
-        src={service.image}
+        src={config.BASE_URL + service.image}
         alt={service.title}
         className={styles.card__image}
       />

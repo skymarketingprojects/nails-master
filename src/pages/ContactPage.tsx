@@ -26,7 +26,9 @@
 //   );
 // }
 import { useParams } from "react-router-dom";
-import { locations } from "../data/locations";
+import { useEffect, useState } from "react";
+import { api } from "../api/baseApi";
+import { type Location } from "../api/types";
 import { LocationContactSection } from "../components/LocationContactSection/LocationContactSection";
 import { HeroSection } from "../components/HeroSection/HeroSection";
 import { TestimonialSection } from "../components/TestimonialSection/TestimonialSection";
@@ -35,14 +37,29 @@ import SEO from "../components/SEO/SEO";
 
 export default function ContactPage() {
   const { slug } = useParams<{ slug: string }>();
+  const [location, setLocation] = useState<Location | null>(null);
+  const [loading, setLoading] = useState(true);
 
-  const location = locations.find((loc) =>
-    slug ? loc.link.endsWith(slug) : false
-  );
+  useEffect(() => {
+    const fetchLocation = async () => {
+      if (!slug) return;
+      try {
+        const data = await api.getLocation(slug);
+        setLocation(data);
+      } catch (error) {
+        console.error("Failed to fetch location:", error);
+      } finally {
+        setLoading(false);
+      }
+    };
+    fetchLocation();
+  }, [slug]);
 
+  if (loading) return null;
   if (!location) {
     return <div>Location not found</div>;
   }
+  console.log(location);
 
   return (
     <>
@@ -51,10 +68,11 @@ export default function ContactPage() {
         description={`Contact ${location.title} for the best nail care services in the area. Find our location, phone number, and hours.`}
         keywords={`nails, manicure, pedicure, ${location.title}`}
       />
-      <HeroSection image={location.image} />
+      <HeroSection page={slug} image={location.image} />
       <LocationContactSection location={location} />
       <LocationGalleryMapSection location={location} />
       <TestimonialSection />
     </>
   );
 }
+

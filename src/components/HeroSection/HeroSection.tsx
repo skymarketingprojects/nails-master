@@ -18,13 +18,16 @@ import React, { useState, useEffect } from "react";
 import styles from "./HeroSection.module.css";
 import { api } from "../../api/baseApi";
 import type { HeroBanner } from "../../api/types";
+import config from "../../config/config";
 
 interface HeroSectionProps {
-  image: string;
+  page: string|undefined;
+  image?: string;
   alt?: string;
 }
 
 export const HeroSection: React.FC<HeroSectionProps> = ({
+  page = "home",
   image: defaultImage,
   alt: defaultAlt = "Hero image",
 }) => {
@@ -34,7 +37,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
   useEffect(() => {
     const fetchBanners = async () => {
       try {
-        const data = await api.getHeroBanners("home");
+        const data = await api.getHeroBanners(page);
         setBanners(data);
       } catch (error) {
         console.error("Failed to fetch banners:", error);
@@ -48,25 +51,44 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
 
   if (loading) return null;
 
-  const displayImage = banners.length > 0 ? `http://127.0.0.1:8000${banners[0].image}` : defaultImage;
+  const displayImage = banners.length > 0 ? `${config.BASE_URL.slice(0, -1)}${banners[0].image}` : defaultImage;
+
   const displayLink = banners.length > 0 ? banners[0].link : null;
 
   return (
     <section id="home" className={styles.hero}>
       {displayLink ? (
         <a href={displayLink} target="_blank" rel="noopener noreferrer">
-          <img
-            src={displayImage}
-            alt={defaultAlt}
-            className={styles.hero__image}
-          />
+          {defaultImage ? (
+            <img
+              src={config.BASE_URL + defaultImage}
+              alt={defaultAlt}
+              className={styles.hero__image}
+            />
+          ) : (
+            <img
+              src={displayImage}
+              alt={defaultAlt}
+              className={styles.hero__image}
+            />
+          )}
         </a>
       ) : (
-        <img
-          src={displayImage}
-          alt={defaultAlt}
-          className={styles.hero__image}
-        />
+        <>
+        {defaultImage ? (
+            <img
+              src={config.BASE_URL + defaultImage}
+              alt={defaultAlt}
+              className={styles.hero__image}
+            />
+          ) : (
+            <img
+              src={displayImage}
+              alt={defaultAlt}
+              className={styles.hero__image}
+            />
+          )}
+          </>
       )}
       <div className={styles.hero__overlay} />
     </section>

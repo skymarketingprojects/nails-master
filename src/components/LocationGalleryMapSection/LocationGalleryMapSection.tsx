@@ -1,7 +1,7 @@
 import React from "react";
 import styles from "./LocationGalleryMapSection.module.css";
 import type { Location } from "../../data/locations";
-
+import config from "../../config/config";
 interface Props {
   location: Location;
 }
@@ -17,7 +17,7 @@ export const LocationGalleryMapSection: React.FC<Props> = ({
           {location.images.map((img, index) => (
             <img
               key={index}
-              src={img}
+              src={config.BASE_URL + img}
               alt={`${location.title} gallery ${index + 1}`}
               className={styles.image}
             />

@@ -6,12 +6,17 @@
     justify-content: center;
     align-items: center;
     text-align: center;
+    text-decoration: none;
 
     /* position: sticky; */
     top: 0;
     z-index: 1100;
 }
-
+.strip a {
+    color: #fff;
+    text-decoration: none;
+    font-weight: 500;
+}
 /* Desktop */
 @media (min-width: 1024px) {
     .strip {

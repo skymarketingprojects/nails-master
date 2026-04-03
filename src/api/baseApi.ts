@@ -8,9 +8,12 @@ import {
   type Testimonial,
   type FooterAddressData,
   type FooterChipData,
+  type Location,
 } from "./types";
 
-const BASE_URL = "http://127.0.0.1:8000";
+import config from "../config/config";
+
+const BASE_URL = config.apiBaseUrl;
 
 async function apiFetch<T>(endpoint: string, options: RequestInit = {}): Promise<T> {
   const url = `${BASE_URL}${endpoint}`;
@@ -27,7 +30,7 @@ async function apiFetch<T>(endpoint: string, options: RequestInit = {}): Promise
   }
 
   const result: ApiResponse<T> = await response.json();
-  
+
   if (result.code !== 200) {
     throw new Error(result.message || "API error");
   }
@@ -36,12 +39,15 @@ async function apiFetch<T>(endpoint: string, options: RequestInit = {}): Promise
 }
 
 export const api = {
-  getSocialMedia: () => apiFetch<SocialMedia[]>("/api/socialmedia/"),
-  getFooterAddress: () => apiFetch<FooterAddressData>("/api/footer/address"),
-  getFooterChips: () => apiFetch<FooterChipData[]>("/api/footer/chips"),
-  getServices: () => apiFetch<Service[]>("/api/services/"),
-  getTestimonials: () => apiFetch<Testimonial[]>("/api/testimonials/"),
-  getHeroBanners: (page: string) => apiFetch<HeroBanner[]>(`/api/herobanners/?page=${page}`),
-  getTopBar: () => apiFetch<TopBar[]>("/api/topbar/"),
-  getContact: () => apiFetch<Contact>("/api/contact/"),
+  getSocialMedia: () => apiFetch<SocialMedia[]>("socialmedia/"),
+  getFooterAddress: () => apiFetch<FooterAddressData>("footer/address"),
+  getFooterChips: () => apiFetch<FooterChipData[]>("footer/chips"),
+  getServices: () => apiFetch<Service[]>("services/"),
+  getTestimonials: () => apiFetch<Testimonial[]>("testimonials/"),
+  getHeroBanners: (page: string) => apiFetch<HeroBanner[]>(`herobanners/?page=${page}`),
+  getTopBar: () => apiFetch<TopBar[]>("topbar/"),
+  getContact: () => apiFetch<Contact>("contact/"),
+  getLocations: () => apiFetch<Location[]>("location/"),
+  getLocation: (slug: string) => apiFetch<Location>(`location/${slug}/`),
 };
+
