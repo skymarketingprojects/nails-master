@@ -10,7 +10,8 @@ export interface InfoPageData {
   buttons: {
     downloadBrochure: {
       label: string;
-      link: string;
+      name: string; // The name from the backend (used for API lookup)
+      link: string; // Fallback link
     };
     apply: {
       label: string;
@@ -32,6 +33,7 @@ interface Props {
 
 export const InfoPageTemplate: React.FC<Props> = ({ data, pageName }) => {
   const [galleryImages, setGalleryImages] = useState<string[]>(data.gallery);
+  const [brochureLink, setBrochureLink] = useState<string>(data.buttons.downloadBrochure.link);
 
   useEffect(() => {
     const fetchGallery = async () => {
@@ -53,6 +55,28 @@ export const InfoPageTemplate: React.FC<Props> = ({ data, pageName }) => {
     fetchGallery();
   }, [pageName]);
 
+  useEffect(() => {
+    const fetchBrochure = async () => {
+      const brochureName = data.buttons.downloadBrochure.name;
+      // Guard clause: if no name provided, skip fetching
+      if (!brochureName) return;
+
+      try {
+        const result = await api.getBrochure(brochureName);
+        if (result?.broucher) {
+          const fullUrl = result.broucher.startsWith("http")
+            ? result.broucher
+            : `${config.BASE_URL.slice(0, -1)}${result.broucher}`;
+          setBrochureLink(fullUrl);
+        }
+      } catch (error) {
+        console.error("Failed to fetch brochure:", error);
+      }
+    };
+
+    fetchBrochure();
+  }, [data.buttons.downloadBrochure.name]);
+
   return (
     <div className={styles.pageContainer}>
       {/* Hero Section */}
@@ -67,7 +91,7 @@ export const InfoPageTemplate: React.FC<Props> = ({ data, pageName }) => {
       {/* Action Buttons */}
       <section className={styles.actionSection}>
         <div className={styles.buttonContainer}>
-          <a href={data.buttons.downloadBrochure.link} className={styles.btnOutline}>
+          <a href={brochureLink} className={styles.btnOutline} target="_blank" rel="noopener noreferrer">
             {data.buttons.downloadBrochure.label}
           </a>
           <a href={data.buttons.apply.link} className={styles.btnFilled}>

@@ -3,6 +3,7 @@
   "buttons": {
     "downloadBrochure": {
       "label": "Download Brochure",
+      "name": "academy",
       "link": "#"
     },
     "apply": {
