@@ -4,7 +4,8 @@ import styles from "./Navbar.module.css";
 import logo from "../../assets/nailslogo.png";
 import { api } from "../../api/baseApi";
 import type { SocialMedia, Location } from "../../api/types";
-import { FaFacebookF, FaLinkedinIn, FaInstagram, FaTwitter } from "react-icons/fa";
+import { FaFacebookF, FaLinkedinIn, FaInstagram, FaTwitter, FaWhatsapp } from "react-icons/fa";
+import { useContact } from "../../context/ContactContext";
 
 export const Navbar: React.FC = () => {
   const [mobileOpen, setMobileOpen] = useState(false);
@@ -13,6 +14,7 @@ export const Navbar: React.FC = () => {
   const [locations, setLocations] = useState<Location[]>([]);
 
   const location = useLocation();
+  const { phone } = useContact();
 
   useEffect(() => {
     const fetchData = async () => {
@@ -139,8 +141,17 @@ export const Navbar: React.FC = () => {
 
 
 
-        {/* Mobile CTA (Socials) */}
+        {/* Mobile CTA (Socials & WhatsApp) */}
         <div className={styles.mobile__cta}>
+          <a
+            href={`https://wa.me/${phone}`}
+            target="_blank"
+            rel="noopener noreferrer"
+            className={styles.whatsappPill}
+          >
+            <FaWhatsapp className={styles.whatsappIcon} />
+            <span>+{phone}</span>
+          </a>
           <div className={styles.socialIcons}>
             {socials.map((social) => (
               <a
@@ -157,8 +168,17 @@ export const Navbar: React.FC = () => {
         </div>
       </nav>
 
-      {/* Desktop CTA (Socials) */}
+      {/* Desktop CTA (Socials & WhatsApp) */}
       <div className={styles.nav__cta}>
+        <a
+          href={`https://wa.me/${phone}`}
+          target="_blank"
+          rel="noopener noreferrer"
+          className={styles.whatsappPill}
+        >
+          <FaWhatsapp className={styles.whatsappIcon} />
+          <span>+{phone}</span>
+        </a>
         <div className={styles.socialIconsDesktop}>
           {socials.map((social) => (
             <a
