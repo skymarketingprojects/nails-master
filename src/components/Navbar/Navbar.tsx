@@ -4,7 +4,7 @@ import styles from "./Navbar.module.css";
 import logo from "../../assets/nailslogo.png";
 import { api } from "../../api/baseApi";
 import type { SocialMedia, Location } from "../../api/types";
-import { FaFacebookF, FaLinkedinIn, FaInstagram, FaGlobe } from "react-icons/fa";
+import { FaFacebookF, FaLinkedinIn, FaInstagram, FaTwitter } from "react-icons/fa";
 
 export const Navbar: React.FC = () => {
   const [mobileOpen, setMobileOpen] = useState(false);
@@ -43,6 +43,8 @@ export const Navbar: React.FC = () => {
         return <FaLinkedinIn />;
       case "facebook":
         return <FaFacebookF />;
+      case "twitter":
+        return <FaTwitter />;
       default:
         return <FaFacebookF />;
     }
@@ -84,28 +86,6 @@ export const Navbar: React.FC = () => {
         <Link to="/#services" className={isActive("#services") ? styles.activeLink : ""} onClick={closeAll}>
           SERVICES
         </Link>
-        <Link
-          to="/franchise"
-          className={isActive("/franchise") ? styles.activeLink : ""}
-          onClick={closeAll}
-        >
-          FRANCHISE
-        </Link>
-        <Link
-          to="/academy"
-          className={isActive("/academy") ? styles.activeLink : ""}
-          onClick={closeAll}
-        >
-          ACADEMY
-        </Link>
-        <Link
-          to="/blogs"
-          className={isActive("/blogs") ? styles.activeLink : ""}
-          onClick={closeAll}
-        >
-          BLOGS
-        </Link>
-
         {/* Contact Dropdown */}
         <div
           className={styles.dropdown}
@@ -116,7 +96,7 @@ export const Navbar: React.FC = () => {
             className={`${styles.dropdown__button} ${location.pathname.startsWith("/contact") ? styles.activeLink : ""}`}
             onClick={() => mobileOpen && setContactOpen(!contactOpen)}
           >
-            CONTACT
+            OUTLET
           </button>
 
           {contactOpen && (
@@ -134,6 +114,30 @@ export const Navbar: React.FC = () => {
             </div>
           )}
         </div>
+        <Link
+          to="/blogs"
+          className={isActive("/blogs") ? styles.activeLink : ""}
+          onClick={closeAll}
+        >
+          BLOGS
+        </Link>
+        <Link
+          to="/franchise"
+          className={isActive("/franchise") ? styles.activeLink : ""}
+          onClick={closeAll}
+        >
+          FRANCHISE
+        </Link>
+        <Link
+          to="/academy"
+          className={isActive("/academy") ? styles.activeLink : ""}
+          onClick={closeAll}
+        >
+          ACADEMY
+        </Link>
+
+
+
 
         {/* Mobile CTA (Socials) */}
         <div className={styles.mobile__cta}>
@@ -149,7 +153,6 @@ export const Navbar: React.FC = () => {
                 {renderIcon(social.platform)}
               </a>
             ))}
-            <a href="#" className={styles.socialIcon}><FaGlobe /></a>
           </div>
         </div>
       </nav>
@@ -168,7 +171,6 @@ export const Navbar: React.FC = () => {
               {renderIcon(social.platform)}
             </a>
           ))}
-          <a href="#" className={styles.socialIcon}><FaGlobe /></a>
         </div>
       </div>
     </header>

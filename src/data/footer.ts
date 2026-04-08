@@ -20,7 +20,7 @@ export const footerAddress: FooterAddressData = {
 
 
 };
-export type SocialPlatform = "instagram" | "linkedin" | "twitter";
+export type SocialPlatform = "instagram" | "linkedin" | "twitter" | "facebook";
 
 export interface FooterFollowItem {
   id: number;
@@ -42,6 +42,11 @@ export const footerFollow: FooterFollowItem[] = [
   {
     id: 3,
     platform: "twitter",
+    link: "#",
+  },
+  {
+    id: 4,
+    platform: "facebook",
     link: "#",
   },
 ];

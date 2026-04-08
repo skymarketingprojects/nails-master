@@ -1,18 +1,31 @@
 .section {
   width: 100%;
   height: 450px;
-  background-color: #eee;
+  background-color: white;
+  display: flex;
+  justify-content: center;
 }
 
 .map {
-  width: 100%;
+  width: 80%;
   height: 100%;
   border: none;
   filter: grayscale(0.2) contrast(1.1);
+  border-radius: 16px;
+}
+
+@media (max-width: 992px) {
+  .map {
+    width: 90%;
+  }
 }
 
 @media (max-width: 768px) {
   .section {
     height: 350px;
+  }
+  .map {
+    width: 100%;
+    border-radius: 0;
   }
 }

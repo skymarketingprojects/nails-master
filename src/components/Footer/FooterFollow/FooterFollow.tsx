@@ -2,14 +2,15 @@ import React, { useState, useEffect } from "react";
 import styles from "./FooterFollow.module.css";
 import { footerFollow as staticFollow } from "../../../data/footer";
 import type { SocialMedia } from "../../../api/types";
-import type { SocialPlatform } from "../../../data/footer";
-import { FaInstagram, FaLinkedinIn, FaTwitter } from "react-icons/fa";
+import { FaInstagram, FaLinkedinIn, FaTwitter, FaFacebookF, FaGlobe } from "react-icons/fa";
 import { api } from "../../../api/baseApi";
 
-const iconMap: Record<SocialPlatform, React.ReactNode> = {
+const iconMap: Record<string, React.ReactNode> = {
   instagram: <FaInstagram />,
   linkedin: <FaLinkedinIn />,
   twitter: <FaTwitter />,
+  facebook: <FaFacebookF />,
+  website: <FaGlobe />,
 };
 
 export const FooterFollow: React.FC = () => {
@@ -48,7 +49,7 @@ export const FooterFollow: React.FC = () => {
             target="_blank"
             rel="noopener noreferrer"
           >
-            {iconMap[item.platform]}
+            {iconMap[item.platform.toLowerCase()] || <FaGlobe />}
           </a>
         ))}
       </div>

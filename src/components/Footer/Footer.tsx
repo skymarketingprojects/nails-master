@@ -7,6 +7,7 @@ import { FooterAddress } from "./FooterAddress/FooterAddress";
 import { FooterFollow } from "./FooterFollow/FooterFollow";
 import { api } from "../../api/baseApi";
 import type { FooterChipData } from "../../api/types";
+import { FaPhone, FaCalendarAlt, FaEnvelope, FaStar } from "react-icons/fa";
 
 export const Footer: React.FC = () => {
   const [chips, setChips] = useState<FooterChipData[]>(staticChips);
@@ -72,10 +73,10 @@ export const Footer: React.FC = () => {
       </div>
 
       <div className={styles.actionRow}>
-        <a className={styles.actionPill}>Call Us Now</a>
-        <a className={styles.actionPill}>Book Appoitment</a>
-        <a className={styles.actionPill}>Mail Us</a>
-        <a className={styles.actionPill}>Contact & Review</a>
+        <a className={styles.actionPill}><FaPhone /> Call Us Now</a>
+        <a className={styles.actionPill}><FaCalendarAlt /> Book Appoitment</a>
+        <a className={styles.actionPill}><FaEnvelope /> Mail Us</a>
+        <a className={styles.actionPill}><FaStar /> Contact & Review</a>
       </div>
 
       <div className={styles.bottom}>

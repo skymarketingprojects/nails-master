@@ -43,7 +43,7 @@
     background: none;
     border: none;
     color: #111;
-    font-size: 15px;
+    font-size: 18px;
     font-weight: 500;
     cursor: pointer;
     letter-spacing: 0.5px;
@@ -123,7 +123,7 @@
     padding: 10px 0;
     text-align: left;
     cursor: pointer;
-    font-size: 14px;
+    font-size: 17px;
     transition: all 0.15s;
 }
 
@@ -229,7 +229,7 @@
     }
 
     .dropdown__item {
-        font-size: 16px;
+        font-size: 19px;
         padding: 8px 0;
     }
 
@@ -243,7 +243,7 @@
 
     .nav__links a,
     .dropdown__button {
-        font-size: 18px;
+        font-size: 21px;
     }
 
     /* No underline animation on mobile */

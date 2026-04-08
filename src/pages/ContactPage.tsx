@@ -90,14 +90,14 @@ export default function ContactPage() {
       {/* 3. Services */}
       <OurServices locationSlug={location.link} locationPhone={location.phone} />
 
-      {/* 4. Booking Section */}
-      <ContactFormSection />
+      {/* 6. Testimonials */}
+      <TestimonialSection />
 
       {/* 5. Map Section */}
       <ContactMapSection mapLink={location.mapLink} title={location.title} />
 
-      {/* 6. Testimonials */}
-      <TestimonialSection />
+      {/* 4. Booking Section */}
+      <ContactFormSection />
     </>
   );
 }

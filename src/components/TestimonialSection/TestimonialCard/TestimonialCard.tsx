@@ -18,7 +18,10 @@ export const TestimonialCard: React.FC<Props> = ({ testimonial }) => {
       // If it's prefixed by /media/, extract only the absolute URL part
       if (url.startsWith("/media/")) {
         const extracted = url.replace("/media/", "");
-        return extracted.includes("%3A") ? decodeURIComponent(extracted) : extracted;
+        let formatted = extracted.includes("%3A") ? decodeURIComponent(extracted) : extracted;
+        // Fix cases where https:/ or http:/ occurs after decoding instead of ://
+        formatted = formatted.replace(/^(https?):\/([^\/])/, "$1://$2");
+        return formatted;
       }
       return url;
     }
@@ -27,40 +30,64 @@ export const TestimonialCard: React.FC<Props> = ({ testimonial }) => {
     return config.BASE_URL.slice(0, -1) + url;
   };
 
+  const getEmbedUrl = (url: string) => {
+    if (!url) return null;
+    const regExp = /^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|&v=)([^#&?]*).*/;
+    const match = url.match(regExp);
+    return (match && match[2].length === 11)
+      ? `https://www.youtube.com/embed/${match[2]}`
+      : null;
+  };
+
   const videoSrc = formatMediaUrl(testimonial.video);
   const imgSrc = formatMediaUrl(testimonial.image);
-
-  // Hierarchy: Video testimonial takes absolute precedence over text testimonial
-  if (videoSrc) {
-    return (
-      <article className={`${styles.card} ${styles.videoCard}`}>
-        <a href={videoSrc} target="_blank" rel="noopener noreferrer" className={styles.videoLink}>
-          {imgSrc && (
-            <img src={imgSrc} alt={testimonial.name} className={styles.videoCover} />
-          )}
-          <div className={styles.playOverlay}>
-            <FaPlay className={styles.playIcon} />
-          </div>
-        </a>
-      </article>
-    );
-  }
+  const embedUrl = getEmbedUrl(videoSrc);
 
   return (
-    <article className={styles.card}>
-      {imgSrc && (
-        <img src={imgSrc} alt={testimonial.name} className={styles.card__image} />
+    <article className={`${styles.card} ${videoSrc && !testimonial.feedback ? styles.videoCard : ""}`}>
+      {/* Video Section */}
+      {videoSrc && (
+        <div className={styles.videoContainer}>
+          {embedUrl ? (
+            <div className={styles.videoEmbed}>
+              <iframe
+                src={embedUrl}
+                title={`Testimonial from ${testimonial.name}`}
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                allowFullScreen
+              ></iframe>
+            </div>
+          ) : (
+            <a href={videoSrc} target="_blank" rel="noopener noreferrer" className={styles.videoLink}>
+              {imgSrc && (
+                <img src={imgSrc} alt={testimonial.name} className={styles.videoCover} />
+              )}
+              <div className={styles.playOverlay}>
+                <FaPlay className={styles.playIcon} />
+              </div>
+            </a>
+          )}
+        </div>
       )}
 
-      <p className={styles.card__feedback}>{testimonial.feedback}</p>
+      {/* Content Section */}
+      <div className={styles.cardTop}>
+        {imgSrc && (
+          <img src={imgSrc} alt={testimonial.name} className={styles.card__image} />
+        )}
+        <div className={styles.personInfo}>
+          <h3 className={styles.card__name}>{testimonial.name}</h3>
+          {testimonial.designation && (
+            <span className={styles.card__designation}>
+              <FcGoogle className={styles.googleIcon} />
+              {testimonial.designation}
+            </span>
+          )}
+        </div>
+      </div>
 
-      <h3 className={styles.card__name}>{testimonial.name}</h3>
-
-      {testimonial.designation && (
-        <span className={styles.card__designation}>
-          <FcGoogle className={styles.googleIcon} />
-          {testimonial.designation}
-        </span>
+      {testimonial.feedback && (
+        <p className={styles.card__feedback}>{testimonial.feedback}</p>
       )}
     </article>
   );

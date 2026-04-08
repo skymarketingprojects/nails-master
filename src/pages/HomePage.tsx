@@ -4,6 +4,7 @@ import { HeroSection } from "../components/HeroSection/HeroSection";
 import { OurServices } from "../components/OurServices/OurServices";
 import { SalonSection } from "../components/SalonSection/SalonSection";
 import { TestimonialSection } from "../components/TestimonialSection/TestimonialSection";
+import { WelcomeSection } from "../components/WelcomeSection/WelcomeSection";
 // import heroImage from "../assets/hero.png";
 import SEO from "../components/SEO/SEO";
 
@@ -37,6 +38,7 @@ export default function HomePage() {
       <HeroSection page="home"  />
       <SalonSection />
       <OurServices />
+      <WelcomeSection />
       <TestimonialSection />
 
 

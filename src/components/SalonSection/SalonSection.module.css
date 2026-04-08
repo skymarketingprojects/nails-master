@@ -1,7 +1,7 @@
 .section {
     width: 100%;
-    padding: 10px 0 80px;
-    background: #f4f4f4;
+    padding: 10px 0 0px;
+    background: white;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -76,34 +76,6 @@
     height: 22px;
 }
 
-/* Message Section */
-.section__message {
-    width: 70%;
-    text-align: center;
-}
-
-.smallHeading {
-    font-size: 24px;
-    font-weight: 400;
-    color: #444;
-    margin-bottom: 10px;
-}
-
-.largeHeading {
-    font-size: 64px;
-    font-weight: 600;
-    margin-bottom: 24px;
-    color: #222;
-}
-
-.paragraph {
-    max-width: 750px;
-    margin: 0 auto;
-    font-size: 17px;
-    line-height: 1.8;
-    color: #666;
-}
-
 /* Tablet */
 @media (max-width: 1023px) {
 
@@ -117,15 +89,11 @@
         gap: 20px;
         justify-content: center;
     }
-
-    .largeHeading {
-        font-size: 44px;
-    }
 }
 
 /* Mobile */
 @media (max-width: 767px) {
-    .section__header{
+    .section__header {
         margin-bottom: 30px;
     }
 
@@ -138,17 +106,5 @@
     .section__cards {
         gap: 20px;
         justify-content: center;
-    }
-
-    .largeHeading {
-        font-size: 32px;
-    }
-
-    .smallHeading {
-        font-size: 18px;
-    }
-
-    .paragraph {
-        font-size: 15px;
     }
 }

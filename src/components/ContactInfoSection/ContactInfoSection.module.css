@@ -1,6 +1,6 @@
 .section {
   padding: 80px 0;
-  background-color: #fff;
+  background-color: white;
 }
 
 .container {
@@ -51,7 +51,7 @@
   position: absolute;
   top: 50%;
   transform: translateY(-50%);
-  background: rgba(255, 255, 255, 0.9);
+  background: white;
   color: #111;
   border: none;
   width: 44px;
@@ -67,7 +67,7 @@
 }
 
 .arrowPrev:hover, .arrowNext:hover {
-  background: #fff;
+  background: white;
 }
 
 .arrowPrev {
@@ -89,7 +89,7 @@
   width: 8px;
   height: 8px;
   border-radius: 50%;
-  background: #ddd;
+  background: white;
   border: none;
   padding: 0;
   cursor: pointer;
@@ -133,7 +133,7 @@
 }
 
 .btnReview {
-  background-color: #fff;
+  background-color: white;
   color: #111;
   border: 1px solid #ddd;
 }
