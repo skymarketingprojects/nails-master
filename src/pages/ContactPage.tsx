@@ -36,11 +36,13 @@ import { ContactFormSection } from "../components/ContactFormSection/ContactForm
 import { ContactMapSection } from "../components/ContactMapSection/ContactMapSection";
 import { TestimonialSection } from "../components/TestimonialSection/TestimonialSection";
 import SEO from "../components/SEO/SEO";
+import { useContact } from "../context/ContactContext";
 
 export default function ContactPage() {
   const { slug } = useParams<{ slug: string }>();
   const [location, setLocation] = useState<Location | null>(null);
   const [loading, setLoading] = useState(true);
+  const { setPhoneOverride } = useContact();
 
   useEffect(() => {
     // Reset state when navigating between locations
@@ -55,6 +57,12 @@ export default function ContactPage() {
       try {
         const data = await api.getLocation(slug);
         setLocation(data);
+        // Set the WhatsApp number to location-specific number
+        if (data && data.phone) {
+          // Remove any non-numeric characters for wa.me link
+          const cleanPhone = data.phone.replace(/\D/g, "");
+          setPhoneOverride(cleanPhone);
+        }
       } catch (error) {
         console.error("Failed to fetch location:", error);
       } finally {
@@ -62,7 +70,10 @@ export default function ContactPage() {
       }
     };
     fetchLocation();
-  }, [slug]);
+
+    // Reset override on unmount or slug change
+    return () => setPhoneOverride(null);
+  }, [slug, setPhoneOverride]);
 
   if (!location) {
     if (loading) return null;

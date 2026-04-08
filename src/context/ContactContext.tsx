@@ -6,12 +6,14 @@ import { api } from "../api/baseApi";
 interface ContactContextType {
   phone: string;
   loading: boolean;
+  setPhoneOverride: (phone: string | null) => void;
 }
 
 const ContactContext = createContext<ContactContextType | undefined>(undefined);
 
 export const ContactProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
   const [phone, setPhone] = useState<string>("9220309477"); // Fallback phone
+  const [phoneOverride, setPhoneOverride] = useState<string | null>(null);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
@@ -19,7 +21,8 @@ export const ContactProvider: React.FC<{ children: ReactNode }> = ({ children })
       try {
         const data = await api.getContact();
         if (data && data.phone) {
-          setPhone(data.phone);
+          const cleanPhone = data.phone.replace(/\D/g, "");
+          setPhone(cleanPhone);
         }
       } catch (error) {
         console.error("Failed to fetch contact data:", error);
@@ -32,7 +35,7 @@ export const ContactProvider: React.FC<{ children: ReactNode }> = ({ children })
   }, []);
 
   return (
-    <ContactContext.Provider value={{ phone, loading }}>
+    <ContactContext.Provider value={{ phone: phoneOverride || phone, loading, setPhoneOverride }}>
       {children}
     </ContactContext.Provider>
   );

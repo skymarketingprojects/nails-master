@@ -3,7 +3,7 @@ import styles from "./Layout.module.css";
 import { Navbar } from "../../components/Navbar/Navbar";
 import { TextStrip } from "../../components/TextStrip/TextStrip";
 import { Footer } from "../../components/Footer/Footer";
-import { FloatingWhatsappButton } from "../../components/FloatingWhatsappButton/FloatingWhatsappButton";
+import { WhatsAppBot } from "../../components/WhatsAppBot/WhatsAppBot";
 import { useContact } from "../../context/ContactContext";
 
 interface Props {
@@ -26,7 +26,7 @@ export const MainLayout: React.FC<Props> = ({
 
       <Footer />
 
-      <FloatingWhatsappButton phoneNumber={phone} />
+      <WhatsAppBot phoneNumber={phone} />
     </div>
   );
 };
