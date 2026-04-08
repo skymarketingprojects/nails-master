@@ -78,8 +78,12 @@ export const Navbar: React.FC = () => {
         <Link to="/" className={isActive("/") ? styles.activeLink : ""} onClick={closeAll}>
           HOME
         </Link>
-        <a href="#about" className={isActive("#about") ? styles.activeLink : ""} onClick={closeAll}>ABOUT</a>
-        <a href="#services" className={isActive("#services") ? styles.activeLink : ""} onClick={closeAll}>SERVICES</a>
+        <Link to="/#about" className={isActive("#about") ? styles.activeLink : ""} onClick={closeAll}>
+          ABOUT
+        </Link>
+        <Link to="/#services" className={isActive("#services") ? styles.activeLink : ""} onClick={closeAll}>
+          SERVICES
+        </Link>
         <Link
           to="/franchise"
           className={isActive("/franchise") ? styles.activeLink : ""}

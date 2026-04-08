@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useRef } from "react";
 import styles from "./ContactServicesSection.module.css";
 import { type Location } from "../../api/types";
 import config from "../../config/config";
@@ -9,15 +9,34 @@ interface ContactServicesSectionProps {
 }
 
 export const ContactServicesSection: React.FC<ContactServicesSectionProps> = ({ location }) => {
-  const { tabs, activeTab, setActiveTab, filteredServices } = useServices(location.link);
-  const [visibleCount, setVisibleCount] = useState(8);
+  const { tabs, activeTab, setActiveTab, filteredServices, hasNext, loadMore, loadingMore } = useServices(location.link, 8);
+  const scrollRef = useRef<HTMLDivElement>(null);
 
   const handleTabChange = (tab: string) => {
     setActiveTab(tab);
-    setVisibleCount(8); // Reset on tab change
   };
 
-  const displayedServices = filteredServices.slice(0, visibleCount);
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        if (entries[0].isIntersecting && hasNext && !loadingMore) {
+          loadMore();
+        }
+      },
+      { threshold: 0.1 }
+    );
+
+    const currentRef = scrollRef.current;
+    if (currentRef) {
+      observer.observe(currentRef);
+    }
+
+    return () => {
+      if (currentRef) {
+        observer.unobserve(currentRef);
+      }
+    };
+  }, [hasNext, loadMore, loadingMore]);
 
   return (
     <section className={styles.section}>
@@ -40,12 +59,12 @@ export const ContactServicesSection: React.FC<ContactServicesSectionProps> = ({ 
         </div>
 
         {/* Content */}
-        {filteredServices.length === 0 ? (
+        {filteredServices.length === 0 && !loadingMore ? (
           <p className={styles.emptyMessage}>No services available for this category.</p>
         ) : (
           <>
             <div className={styles.grid}>
-              {displayedServices.map((service, index) => {
+              {filteredServices.map((service, index) => {
                 const imgSrc = service.image.startsWith("http")
                   ? service.image
                   : config.BASE_URL.slice(0, -1) + service.image;
@@ -63,20 +82,13 @@ export const ContactServicesSection: React.FC<ContactServicesSectionProps> = ({ 
               })}
             </div>
 
-            {visibleCount < filteredServices.length && (
-              <div className={styles.showMoreWrapper}>
-                <button
-                  className={styles.showMoreBtn}
-                  onClick={() => setVisibleCount((prev) => prev + 8)}
-                >
-                  Show More
-                </button>
-              </div>
-            )}
+            {/* Scroll Anchor for Infinite Pagination */}
+            <div ref={scrollRef} style={{ height: "20px" }}>
+              {loadingMore && <p className={styles.loadingMoreText}>Loading more services...</p>}
+            </div>
           </>
         )}
       </div>
     </section>
   );
 };
-

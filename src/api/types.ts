@@ -86,5 +86,13 @@ export interface BlogListResponse {
   results: BlogItem[];
 }
 
-export type { Service, Testimonial, FooterAddressData, FooterChipData };
+export interface ServiceListResponse {
+  total_pages: number;
+  current_page: number;
+  has_next: boolean;
+  has_previous: boolean;
+  count: number;
+  results: Service[];
+}
 
+export type { Service, Testimonial, FooterAddressData, FooterChipData };

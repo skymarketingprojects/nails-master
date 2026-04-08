@@ -83,12 +83,13 @@ export const LocationCard: React.FC<Props> = ({ location }) => {
         </a>
 
         <a
-          href={location.mapLink || "#"}
+          href={location.brochure ? (location.brochure.startsWith("http") ? location.brochure : config.BASE_URL.slice(0, -1) + location.brochure) : "#"}
           target="_blank"
           rel="noopener noreferrer"
           className={styles.linkDirection}
+          download
         >
-          <FaLocationArrow /> Get Direction
+          <FaLocationArrow /> Download Brochure
         </a>
       </div>
     </article>

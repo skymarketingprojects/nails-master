@@ -2,44 +2,37 @@ import React, { useState, useEffect } from "react";
 import styles from "./OurServices.module.css";
 import { ServiceCard } from "./ServiceCard/ServiceCard";
 import { useServices } from "../../hooks/useServices";
+import { useContact } from "../../context/ContactContext";
 
 interface OurServicesProps {
   locationSlug?: string;
+  locationPhone?: string;
 }
 
-export const OurServices: React.FC<OurServicesProps> = ({ locationSlug }) => {
-  const { tabs, activeTab, setActiveTab, loading, filteredServices, services } = useServices(locationSlug);
-  const [visibleCount, setVisibleCount] = useState(6);
-  const [increment, setIncrement] = useState(3);
-
+export const OurServices: React.FC<OurServicesProps> = ({ locationSlug, locationPhone }) => {
+  const { phone: globalPhone } = useContact();
+  const [pageSize, setPageSize] = useState(6);
+  
   useEffect(() => {
-    const updateIncrement = () => {
+    const updatePageSize = () => {
       const width = window.innerWidth;
-
-      if (width >= 1200) {
-        setIncrement(6);
-      } else if (width >= 768) {
-        setIncrement(4);
-      } else {
-        setIncrement(3);
-      }
+      if (width >= 1200) setPageSize(6);
+      else if (width >= 768) setPageSize(4);
+      else setPageSize(3);
     };
 
-    updateIncrement();
-    window.addEventListener("resize", updateIncrement);
-    return () => window.removeEventListener("resize", updateIncrement);
+    updatePageSize();
+    window.addEventListener("resize", updatePageSize);
+    return () => window.removeEventListener("resize", updatePageSize);
   }, []);
+
+  const { tabs, activeTab, setActiveTab, loading, loadingMore, filteredServices, hasNext, loadMore } = useServices(locationSlug, pageSize);
 
   const handleTabChange = (tabName: string) => {
     setActiveTab(tabName);
-    setVisibleCount(increment); // Reset visible count on tab change
   };
 
-  const handleViewAll = () => {
-    setVisibleCount((prev) => prev + increment);
-  };
-
-  if (loading && services.length === 0) return null;
+  if (loading && filteredServices.length === 0) return null;
 
   return (
     <section id="services" className={styles.section} aria-labelledby="services-heading">
@@ -62,15 +55,42 @@ export const OurServices: React.FC<OurServicesProps> = ({ locationSlug }) => {
       </div>
 
       <div className={styles.section__grid}>
-        {filteredServices.slice(0, visibleCount).map((service) => (
-          <ServiceCard key={service.id} service={service} />
-        ))}
+        {filteredServices.map((service) => {
+          // Replace the phone number in the WhatsApp link
+          let updatedService = { ...service };
+          const activePhone = locationPhone || globalPhone;
+          
+          if (activePhone) {
+            const cleanPhone = activePhone.replace(/\D/g, "");
+            
+            if (updatedService.link.includes("wa.me/")) {
+              // Replace digits immediately following wa.me/
+              updatedService.link = updatedService.link.replace(
+                /(wa\.me\/)(\d+)/,
+                `wa.me/${cleanPhone}`
+              );
+            } else if (updatedService.link.includes("phone=")) {
+              // Replace digits immediately following phone=
+              updatedService.link = updatedService.link.replace(
+                /([?&]phone=)(\d+)/,
+                `$1${cleanPhone}`
+              );
+            }
+          }
+          return <ServiceCard key={service.id} service={updatedService} />;
+        })}
       </div>
 
-      {visibleCount < filteredServices.length && (
+      {loadingMore && (
+        <div className={styles.section__footer}>
+          <p>Loading more services...</p>
+        </div>
+      )}
+
+      {hasNext && !loadingMore && (
         <div className={styles.section__footer}>
           <button
-            onClick={handleViewAll}
+            onClick={loadMore}
             className={styles.section__viewMore}
           >
             View More

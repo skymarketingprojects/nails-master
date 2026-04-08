@@ -88,7 +88,7 @@ export default function ContactPage() {
       <ContactInfoSection location={location} />
 
       {/* 3. Services */}
-      <OurServices locationSlug={location.link} />
+      <OurServices locationSlug={location.link} locationPhone={location.phone} />
 
       {/* 4. Booking Section */}
       <ContactFormSection />

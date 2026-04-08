@@ -2,7 +2,7 @@
     display: flex;
     flex-direction: column;
     width: 250px;
-    background: #fff;
+    /* background: #fff; */
     font-family: inherit;
 }
 
@@ -116,16 +116,20 @@
     color: #111;
     text-decoration: none;
     font-weight: 500;
+    font-size: 15px;
 }
 
-.linkDirection:hover {
-    text-decoration: underline;
-}
+/* .linkDirection:hover {
+    color: #111;
+    text-decoration: none;
+    font-size: 15px;
+} */
+
 
 /* Tablet */
 @media (max-width: 1023px) {
     .card {
-        width: 220px;
+        width: 250px;
     }
 }
 

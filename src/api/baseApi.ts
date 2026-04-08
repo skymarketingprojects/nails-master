@@ -4,7 +4,6 @@ import {
   type HeroBanner,
   type TopBar,
   type Contact,
-  type Service,
   type Testimonial,
   type FooterAddressData,
   type FooterChipData,
@@ -12,9 +11,9 @@ import {
   type Category,
   type GalleryItem,
   type Brochure,
-  type BlogItem,
   type BlogDetail,
   type BlogListResponse,
+  type ServiceListResponse,
 } from "./types";
 
 import config from "../config/config";
@@ -48,12 +47,14 @@ export const api = {
   getSocialMedia: () => apiFetch<SocialMedia[]>("socialmedia/"),
   getFooterAddress: () => apiFetch<FooterAddressData>("footer/address"),
   getFooterChips: () => apiFetch<FooterChipData[]>("footer/chips"),
-  getServices: (params?: { location?: string; category?: string }) => {
+  getServices: (params?: { location?: string; category?: string; page?: number; page_size?: number }) => {
     const query = new URLSearchParams();
     if (params?.location) query.set("location", params.location);
     if (params?.category) query.set("category", params.category);
+    if (params?.page) query.set("page", params.page.toString());
+    if (params?.page_size) query.set("page_size", params.page_size.toString());
     const qs = query.toString();
-    return apiFetch<Service[]>(`services/${qs ? `?${qs}` : ""}`);
+    return apiFetch<ServiceListResponse>(`services/${qs ? `?${qs}` : ""}`);
   },
   getTestimonials: () => apiFetch<Testimonial[]>("testimonials/"),
   getHeroBanners: (page: string) => apiFetch<HeroBanner[]>(`herobanners/?page=${page}`),

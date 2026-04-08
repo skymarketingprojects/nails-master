@@ -111,6 +111,13 @@
     color: #fff;
 }
 
+.loadingMoreText {
+    text-align: center;
+    color: #777;
+    font-size: 14px;
+    margin-top: 20px;
+}
+
 @media (max-width: 1024px) {
   .grid {
     grid-template-columns: repeat(3, 1fr);

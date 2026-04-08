@@ -25,3 +25,6 @@ dist-ssr
 .env
 
 **/AiDocs/
+
+data.json
+src/data/data_compilation.md

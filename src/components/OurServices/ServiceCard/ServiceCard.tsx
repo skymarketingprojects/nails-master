@@ -1,20 +1,13 @@
 import React from "react";
 import styles from "./ServiceCard.module.css";
 import type { Service } from "../../../data/services";
-import { useContact } from "../../../context/ContactContext";
+// import { useContact } from "../../../context/ContactContext";
 import config from "../../../config/config";
 interface Props {
   service: Service;
 }
 
 export const ServiceCard: React.FC<Props> = ({ service }) => {
-  const { phone } = useContact();
-  
-  // Update the WhatsApp link with the latest phone number if it's a WhatsApp link
-  const waLink = service.link.includes("wa.me") 
-    ? service.link.replace(/wa\.me\/[0-9]+/, `wa.me/${phone}`)
-    : service.link;
-
   return (
     <article className={styles.card}>
       <img
@@ -28,7 +21,7 @@ export const ServiceCard: React.FC<Props> = ({ service }) => {
         <p className={styles.card__price}>₹{service.price}/-</p>
 
         <a
-          href={waLink}
+          href={service.link}
           target="_blank"
           rel="noopener noreferrer"
           className={styles.card__button}

@@ -72,10 +72,10 @@ export const Footer: React.FC = () => {
       </div>
 
       <div className={styles.actionRow}>
-        <a href="#" className={styles.actionPill}>Call Us Now</a>
-        <a href="#" className={styles.actionPill}>Book Appoitment</a>
-        <a href="#" className={styles.actionPill}>Mail Us</a>
-        <a href="#" className={styles.actionPill}>Contact & Review</a>
+        <a className={styles.actionPill}>Call Us Now</a>
+        <a className={styles.actionPill}>Book Appoitment</a>
+        <a className={styles.actionPill}>Mail Us</a>
+        <a className={styles.actionPill}>Contact & Review</a>
       </div>
 
       <div className={styles.bottom}>

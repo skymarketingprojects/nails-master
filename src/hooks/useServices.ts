@@ -1,4 +1,4 @@
-import { useState, useEffect, useMemo } from "react";
+import { useState, useEffect, useMemo, useCallback } from "react";
 import { api } from "../api/baseApi";
 import type { Service, Category } from "../api/types";
 import { services as staticServices } from "../data/services";
@@ -6,58 +6,76 @@ import { services as staticServices } from "../data/services";
 /**
  * Custom hook for fetching services and categories with category tab filtering.
  * @param locationSlug - Optional location slug to filter services server-side via the API query param.
+ * @param pageSize - Number of items per page.
  */
-export function useServices(locationSlug?: string) {
+export function useServices(locationSlug?: string, pageSize: number = 6) {
   const [services, setServices] = useState<Service[]>(locationSlug ? [] : staticServices);
   const [categories, setCategories] = useState<Category[]>([]);
   const [loading, setLoading] = useState(true);
+  const [loadingMore, setLoadingMore] = useState(false);
   const [activeTab, setActiveTab] = useState("View All");
+  const [currentPage, setCurrentPage] = useState(1);
+  const [hasNext, setHasNext] = useState(false);
 
+  // Fetch categories once on mount or when locationSlug changes
   useEffect(() => {
-    let isMounted = true;
-
-    // Reset state when locationSlug changes to avoid stale data
-    setServices(locationSlug ? [] : staticServices);
-    setActiveTab("View All");
-    setLoading(true);
-
-    const fetchData = async () => {
+    const fetchCategories = async () => {
       try {
-        const [servicesData, categoriesData] = await Promise.all([
-          api.getServices(locationSlug ? { location: locationSlug } : undefined),
-          api.getCategories(),
-        ]);
-
-        if (!isMounted) return;
-
-        if (servicesData && servicesData.length > 0) {
-          setServices(servicesData);
-        }
-        if (categoriesData && categoriesData.length > 0) {
-          setCategories(categoriesData);
-        }
+        const categoriesData = await api.getCategories();
+        if (categoriesData) setCategories(categoriesData);
       } catch (error) {
-        if (isMounted) console.error("Failed to fetch data:", error);
-      } finally {
-        if (isMounted) setLoading(false);
+        console.error("Failed to fetch categories:", error);
       }
     };
+    fetchCategories();
+  }, []);
 
-    fetchData();
+  const fetchServices = useCallback(async (page: number, isNewTab: boolean = false) => {
+    try {
+      if (page === 1) setLoading(true);
+      else setLoadingMore(true);
 
-    return () => {
-      isMounted = false;
-    };
-  }, [locationSlug]);
+      const params = {
+        location: locationSlug,
+        category: activeTab === "View All" ? undefined : activeTab,
+        page,
+        page_size: pageSize,
+      };
+
+      const response = await api.getServices(params);
+      
+      if (response && response.results) {
+        setServices(prev => isNewTab ? response.results : [...prev, ...response.results]);
+        setHasNext(response.has_next);
+        setCurrentPage(response.current_page);
+      }
+    } catch (error) {
+      console.error("Failed to fetch services:", error);
+    } finally {
+      setLoading(false);
+      setLoadingMore(false);
+    }
+  }, [locationSlug, activeTab, pageSize]);
+
+  // Refetch when location or tab changes
+  useEffect(() => {
+    setCurrentPage(1);
+    fetchServices(1, true);
+  }, [locationSlug, activeTab, fetchServices]);
+
+  const loadMore = () => {
+    if (hasNext && !loadingMore) {
+      fetchServices(currentPage + 1);
+    }
+  };
 
   const tabs = useMemo(() => {
     return ["View All", ...categories.map((c) => c.name)];
   }, [categories]);
 
-  const filteredServices = useMemo(() => {
-    if (activeTab === "View All") return services;
-    return services.filter((service) => service.category === activeTab);
-  }, [services, activeTab]);
+  // Since filtering is now server-side, filteredServices is same as services
+  // But we keep the variable for compatibility with existing components
+  const filteredServices = services;
 
   return {
     services,
@@ -66,6 +84,9 @@ export function useServices(locationSlug?: string) {
     activeTab,
     setActiveTab,
     loading,
+    loadingMore,
     filteredServices,
+    hasNext,
+    loadMore,
   };
 }
