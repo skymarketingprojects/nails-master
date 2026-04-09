@@ -138,6 +138,18 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
       <button className={`${styles.arrow} ${styles.next}`} onClick={nextSlide} aria-label="Next slide">
         <IoChevronForward size={24} />
       </button>
+
+      {/* <div className={styles.hero__dots}>
+        {banners.map((_, index) => (
+          <button
+            key={index}
+            className={`${styles.dot} ${index === currentIndex ? styles.dotActive : ""}`}
+            onClick={() => setCurrentIndex(index)}
+            aria-label={`Go to slide ${index + 1}`}
+          />
+        ))}
+      </div> */}
+      
       <div className={styles.hero__overlay} />
     </section>
   );

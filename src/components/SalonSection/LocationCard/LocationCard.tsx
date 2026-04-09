@@ -37,7 +37,7 @@ import React from "react";
 import styles from "./LocationCard.module.css";
 import type { Location } from "../../../api/types";
 import { FcGoogle } from "react-icons/fc";
-import { FaMapMarkerAlt, FaWhatsapp, FaLocationArrow } from "react-icons/fa";
+import { FaMapMarkerAlt, FaLocationArrow, FaStar, FaPhoneAlt } from "react-icons/fa";
 import config from "../../../config/config";
 interface Props {
   location: Location;
@@ -54,42 +54,58 @@ export const LocationCard: React.FC<Props> = ({ location }) => {
         />
       </div>
 
-      <div className={styles.card__infoContainer}>
+      <div className={styles.card__content}>
+        <a 
+          href={location.locationlink || "#"} 
+          target="_blank" 
+          rel="noopener noreferrer" 
+          className={styles.card__titleRow}
+        >
+          <FaMapMarkerAlt className={styles.mapIcon} />
+          <h3 className={styles.card__title}>{location.title}</h3>
+        </a>
+        
         <div className={styles.card__metaRow}>
-          <div className={styles.card__address}>
-            <FaMapMarkerAlt className={styles.metaIconRed} /> 
-            <span>{location.title}</span>
-          </div>
-          <div className={styles.card__phone}>
-            <FaWhatsapp className={styles.metaIconGreen} />
-            <a href={`https://wa.me/91${location.phone}`}>{location.phone}</a>
+          <a href={`tel:${location.phone.replace(/\s+/g, "")}`} className={styles.card__phoneBadge}>
+            <FaPhoneAlt size={10} className={styles.phoneIcon} /> {location.phone}
+          </a>
+          <div className={styles.card__stars}>
+            {[...Array(4)].map((_, i) => (
+              <FaStar key={i} className={styles.starIcon} />
+            ))}
           </div>
         </div>
 
-        <a
-          href={location.link || "#"}
-          className={styles.btnBlack}
-        >
-          <FaMapMarkerAlt /> Visit Branch
-        </a>
 
-        <a
-          href={location.locationlink || "#"}
-          target="_blank"
-          rel="noopener noreferrer"
-          className={styles.btnOutlined}
-        >
-          <FcGoogle /> Review Us
-        </a>
+        <hr className={styles.card__separator} />
+
+        <div className={styles.card__btnGroup}>
+          <a
+            href={location.link || "#"}
+            className={styles.btnBlack}
+          >
+            Visit Branch
+          </a>
+
+          <a
+            href={location.locationlink || "#"}
+            target="_blank"
+            rel="noopener noreferrer"
+            className={styles.btnOutlined}
+          >
+            <FcGoogle className={styles.googleIcon} />
+            Review Us
+          </a>
+        </div>
 
         <a
           href={location.brochure ? (location.brochure.startsWith("http") ? location.brochure : config.BASE_URL.slice(0, -1) + location.brochure) : "#"}
           target="_blank"
           rel="noopener noreferrer"
-          className={styles.linkDirection}
+          className={styles.linkDownload}
           download
         >
-          <FaLocationArrow /> Download Brochure
+          <FaLocationArrow size={10} /> Download Brochure
         </a>
       </div>
     </article>
