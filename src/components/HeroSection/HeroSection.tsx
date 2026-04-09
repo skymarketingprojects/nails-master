@@ -139,7 +139,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
         <IoChevronForward size={24} />
       </button>
 
-      <div className={styles.hero__dots}>
+      {/* <div className={styles.hero__dots}>
         {banners.map((_, index) => (
           <button
             key={index}
@@ -148,7 +148,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
             aria-label={`Go to slide ${index + 1}`}
           />
         ))}
-      </div>
+      </div> */}
       
       <div className={styles.hero__overlay} />
     </section>
