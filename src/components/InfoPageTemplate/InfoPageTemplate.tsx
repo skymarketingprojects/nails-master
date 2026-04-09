@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from "react";
 import styles from "./InfoPageTemplate.module.css";
-import heroPlaceholder from "../../assets/banner/Home-Banner.jpeg"; // Fallback image if JSON is empty
 import { api } from "../../api/baseApi";
 import config from "../../config/config";
 import { type GalleryItem } from "../../api/types";
+import { HeroSection } from "../HeroSection/HeroSection";
 
 export interface InfoPageData {
   heroImage: string;
@@ -43,7 +43,7 @@ export const InfoPageTemplate: React.FC<Props> = ({ data, pageName }) => {
           const fullImageUrls = result.map(item => 
             item.image.startsWith("http") 
               ? item.image 
-              : `${config.BASE_URL.slice(0, -1)}${item.image}`
+              : `${config.BASE_URL.replace(/\/$/, "")}${item.image.startsWith("/") ? "" : "/"}${item.image}`
           );
           setGalleryImages(fullImageUrls);
         }
@@ -58,7 +58,6 @@ export const InfoPageTemplate: React.FC<Props> = ({ data, pageName }) => {
   useEffect(() => {
     const fetchBrochure = async () => {
       const brochureName = data.buttons.downloadBrochure.name;
-      // Guard clause: if no name provided, skip fetching
       if (!brochureName) return;
 
       try {
@@ -66,7 +65,7 @@ export const InfoPageTemplate: React.FC<Props> = ({ data, pageName }) => {
         if (result?.broucher) {
           const fullUrl = result.broucher.startsWith("http")
             ? result.broucher
-            : `${config.BASE_URL.slice(0, -1)}${result.broucher}`;
+            : `${config.BASE_URL.replace(/\/$/, "")}${result.broucher.startsWith("/") ? "" : "/"}${result.broucher}`;
           setBrochureLink(fullUrl);
         }
       } catch (error) {
@@ -80,13 +79,7 @@ export const InfoPageTemplate: React.FC<Props> = ({ data, pageName }) => {
   return (
     <div className={styles.pageContainer}>
       {/* Hero Section */}
-      <section className={styles.heroSection}>
-        <img 
-          src={data.heroImage || heroPlaceholder} 
-          alt="Hero" 
-          className={styles.heroImage} 
-        />
-      </section>
+      <HeroSection page={pageName} image={data.heroImage} />
 
       {/* Action Buttons */}
       <section className={styles.actionSection}>

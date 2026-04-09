@@ -5,6 +5,8 @@ import { api } from "../../api/baseApi";
 import { type BlogDetail, type BlogItem } from "../../api/types";
 import config from "../../config/config";
 import SEO from "../../components/SEO/SEO";
+import { HeroSection } from "../../components/HeroSection/HeroSection";
+
 
 const BlogDetailPage: React.FC = () => {
   const { slug } = useParams<{ slug: string }>();
@@ -86,25 +88,24 @@ const BlogDetailPage: React.FC = () => {
   });
 
   return (
-    <div className={styles.container}>
+    <div className={styles.pageWrapper}>
       <SEO 
         title={blog.title} 
         description={cleanDescription.substring(0, 160)}
       />
-      <header className={styles.header}>
-        <img src={blogImage} alt={blog.title} className={styles.heroImage} />
-        <div className={styles.meta}>
-          <span>{formattedDate}</span>
-          <span>{blog.author}</span>
-        </div>
-      </header>
-      <main className={styles.main}>
-        <h1>{blog.title}</h1>
-        <div 
-          className={styles.content}
-          dangerouslySetInnerHTML={{ __html: processedContent }}
-        />
-      </main>
+      <HeroSection page="blogs" />
+      <div className={styles.container}>
+        <main className={styles.main}>
+          <div className={styles.meta}>
+            <span>{formattedDate}</span>
+            <span>{blog.author}</span>
+          </div>
+          <h1>{blog.title}</h1>
+          <div 
+            className={styles.content}
+            dangerouslySetInnerHTML={{ __html: processedContent }}
+          />
+        </main>
 
       {moreBlogs.length > 0 && (
         <section className={styles.moreBlogs}>
@@ -126,6 +127,7 @@ const BlogDetailPage: React.FC = () => {
           </div>
         </section>
       )}
+      </div>
     </div>
   );
 };

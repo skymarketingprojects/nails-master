@@ -58,13 +58,14 @@ const BlogListPage: React.FC = () => {
   };
 
   return (
-    <div className={styles.container}>
+    <div className={styles.pageWrapper}>
       <SEO 
         title="Our Blogs" 
         description="Stay updated with the latest nail art trends, care tips, and studio news from Nails Master."
       />
       <HeroSection page="blogs" />
-      <div className={styles.contentWrapper}>
+      <div className={styles.container}>
+        <div className={styles.contentWrapper}>
         <header className={styles.header}>
           <h1>Our Latest Blogs</h1>
         </header>
@@ -107,6 +108,7 @@ const BlogListPage: React.FC = () => {
             </button>
           </div>
         )}
+      </div>
       </div>
     </div>
   );
