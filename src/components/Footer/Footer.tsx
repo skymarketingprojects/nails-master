@@ -8,6 +8,11 @@ import { FooterFollow } from "./FooterFollow/FooterFollow";
 import { api } from "../../api/baseApi";
 import type { FooterChipData } from "../../api/types";
 import { FaPhone, FaCalendarAlt, FaEnvelope, FaStar } from "react-icons/fa";
+import img1 from "../../assets/footer/1.jpg";
+import img2 from "../../assets/footer/2.jpg";
+import img3 from "../../assets/footer/3.jpg";
+import img4 from "../../assets/footer/4.jpg";
+
 
 export const Footer: React.FC = () => {
   const [chips, setChips] = useState<FooterChipData[]>(staticChips);
@@ -58,10 +63,10 @@ export const Footer: React.FC = () => {
 
         <div className={styles.gallery}>
           <div className={styles.galleryGrid}>
-            <div className={styles.galleryBox}></div>
-            <div className={styles.galleryBox}></div>
-            <div className={styles.galleryBox}></div>
-            <div className={styles.galleryBox}></div>
+            <div className={styles.galleryBox}><img src={img1} alt="Footer Gallery 1" /></div>
+            <div className={styles.galleryBox}><img src={img2} alt="Footer Gallery 2" /></div>
+            <div className={styles.galleryBox}><img src={img3} alt="Footer Gallery 3" /></div>
+            <div className={styles.galleryBox}><img src={img4} alt="Footer Gallery 4" /></div>
           </div>
         </div>
       </div>
