@@ -8,10 +8,10 @@ import { FooterFollow } from "./FooterFollow/FooterFollow";
 import { api } from "../../api/baseApi";
 import type { FooterChipData } from "../../api/types";
 import { FaPhone, FaCalendarAlt, FaEnvelope, FaStar } from "react-icons/fa";
-import img1 from "../../assets/footer/1.jpg";
-import img2 from "../../assets/footer/2.jpg";
-import img3 from "../../assets/footer/3.jpg";
-import img4 from "../../assets/footer/4.jpg";
+import img1 from "../../assets/Footer/1.jpg";
+import img2 from "../../assets/Footer/2.jpg";
+import img3 from "../../assets/Footer/3.jpg";
+import img4 from "../../assets/Footer/4.jpg";
 
 
 export const Footer: React.FC = () => {
