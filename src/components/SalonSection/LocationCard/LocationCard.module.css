@@ -97,7 +97,16 @@
 
 .card__stars {
     display: flex;
+    align-items: center;
     gap: 3px;
+}
+
+.ratingText {
+    font-size: 11px;
+    color: #444;
+    font-weight: 600;
+    margin-left: 4px;
+    font-family: 'Outfit', sans-serif;
 }
 
 .starIcon {

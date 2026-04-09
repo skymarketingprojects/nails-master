@@ -73,6 +73,7 @@ export const LocationCard: React.FC<Props> = ({ location }) => {
             {[...Array(4)].map((_, i) => (
               <FaStar key={i} className={styles.starIcon} />
             ))}
+            <span className={styles.ratingText}>4.0 / 5</span>
           </div>
         </div>
 

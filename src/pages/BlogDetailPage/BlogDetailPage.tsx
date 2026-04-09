@@ -77,7 +77,7 @@ const BlogDetailPage: React.FC = () => {
     );
   }
 
-  const blogImage = getFullUrl(blog.image);
+  // const blogImage = getFullUrl(blog.image);
   const cleanDescription = stripHtml(blog.description);
   const processedContent = processHtmlContent(blog.description);
 
@@ -89,8 +89,8 @@ const BlogDetailPage: React.FC = () => {
 
   return (
     <div className={styles.pageWrapper}>
-      <SEO 
-        title={blog.title} 
+      <SEO
+        title={blog.title}
         description={cleanDescription.substring(0, 160)}
       />
       <HeroSection page="blogs" />
@@ -101,32 +101,32 @@ const BlogDetailPage: React.FC = () => {
             <span>{blog.author}</span>
           </div>
           <h1>{blog.title}</h1>
-          <div 
+          <div
             className={styles.content}
             dangerouslySetInnerHTML={{ __html: processedContent }}
           />
         </main>
 
-      {moreBlogs.length > 0 && (
-        <section className={styles.moreBlogs}>
-          <h2>Explore More Blogs</h2>
-          <div className={styles.moreBlogsGrid}>
-            {moreBlogs.map((b) => {
-              const moreBlogImg = getFullUrl(b.image);
+        {moreBlogs.length > 0 && (
+          <section className={styles.moreBlogs}>
+            <h2>Explore More Blogs</h2>
+            <div className={styles.moreBlogsGrid}>
+              {moreBlogs.map((b) => {
+                const moreBlogImg = getFullUrl(b.image);
 
-              return (
-                <div key={b.id} className={styles.smallCard}>
-                  <img src={moreBlogImg} alt={b.title} />
-                  <div className={styles.smallCardContent}>
-                    <h3>{b.title}</h3>
-                    <Link to={`/blog/${b.slug}`}>Read More</Link>
+                return (
+                  <div key={b.id} className={styles.smallCard}>
+                    <img src={moreBlogImg} alt={b.title} />
+                    <div className={styles.smallCardContent}>
+                      <h3>{b.title}</h3>
+                      <Link to={`/blog/${b.slug}`}>Read More</Link>
+                    </div>
                   </div>
-                </div>
-              );
-            })}
-          </div>
-        </section>
-      )}
+                );
+              })}
+            </div>
+          </section>
+        )}
       </div>
     </div>
   );
