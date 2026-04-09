@@ -36,7 +36,7 @@ export const Footer: React.FC = () => {
             <p className={styles.logoLight}>the studio</p>
           </div>
           <p className={styles.desc}>
-            Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer
+            Nails Master provides nail extensions, gel nails, acrylic art, and salon care by technicians. Explore services, view styles, and download brochures for treatments and pricing.!
           </p>
         </div>
 
