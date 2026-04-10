@@ -73,18 +73,25 @@
     }
 }
 
-/* Mobile */
+/* Mobile / Small Screens */
 @media (max-width: 767px) {
     .section__grid {
         grid-template-columns: 1fr;
     }
+}
+
+@media (max-width: 700px) {
+    .section__grid {
+        width: 95%;
+        max-width: 95%;
+    }
     
     .section__tabs {
-        max-width: 100%;
+        max-width: 95%;
         justify-content: flex-start;
     }
     .section__title {
-        max-width: 100%;
+        max-width: 95%;
     }
 }
 
