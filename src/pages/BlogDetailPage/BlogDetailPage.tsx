@@ -93,7 +93,7 @@ const BlogDetailPage: React.FC = () => {
         title={blog.title}
         description={cleanDescription.substring(0, 160)}
       />
-      <HeroSection page="blogs" />
+      <HeroSection image={blog.image} skipFetch={true} />
       <div className={styles.container}>
         <main className={styles.main}>
           <div className={styles.meta}>

@@ -4,6 +4,7 @@ import { api } from "../../api/baseApi";
 import config from "../../config/config";
 import { type GalleryItem } from "../../api/types";
 import { HeroSection } from "../HeroSection/HeroSection";
+import { useContact } from "../../context/ContactContext";
 
 export interface InfoPageData {
   heroImage: string;
@@ -32,8 +33,15 @@ interface Props {
 }
 
 export const InfoPageTemplate: React.FC<Props> = ({ data, pageName }) => {
+  const { phone } = useContact();
   const [galleryImages, setGalleryImages] = useState<string[]>(data.gallery);
   const [brochureLink, setBrochureLink] = useState<string>(data.buttons.downloadBrochure.link);
+
+  const whatsappMsg = pageName === "franchise" 
+    ? "Hello Nails Master! I am interested in your Franchise opportunity. Please share more details."
+    : "Hello Nails Master! I am interested in joining your Academy. Please share more details about the courses.";
+    
+  const whatsappLink = `https://wa.me/${phone}?text=${encodeURIComponent(whatsappMsg)}`;
 
   useEffect(() => {
     const fetchGallery = async () => {
@@ -87,7 +95,7 @@ export const InfoPageTemplate: React.FC<Props> = ({ data, pageName }) => {
           <a href={brochureLink} className={styles.btnOutline} target="_blank" rel="noopener noreferrer">
             {data.buttons.downloadBrochure.label}
           </a>
-          <a href={data.buttons.apply.link} className={styles.btnFilled}>
+          <a href={whatsappLink} className={styles.btnFilled} target="_blank" rel="noopener noreferrer">
             {data.buttons.apply.label}
           </a>
         </div>

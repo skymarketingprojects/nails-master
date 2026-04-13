@@ -22,24 +22,32 @@ import config from "../../config/config";
 import { IoChevronBack, IoChevronForward } from "react-icons/io5";
 
 interface HeroSectionProps {
-  page: string | undefined;
+  page?: string;
   image?: string;
   alt?: string;
+  skipFetch?: boolean;
 }
 
 export const HeroSection: React.FC<HeroSectionProps> = ({
-  page = "home",
+  page,
   image: defaultImage,
   alt: defaultAlt = "Hero image",
+  skipFetch = false,
 }) => {
   const [banners, setBanners] = useState<HeroBanner[]>([]);
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(!skipFetch && !!page);
   const [currentIndex, setCurrentIndex] = useState(0);
 
   useEffect(() => {
     const fetchBanners = async () => {
+      if (skipFetch || !page) {
+        setLoading(false);
+        return;
+      }
+      
       try {
-        const data = await api.getHeroBanners(page || "home");
+        setLoading(true);
+        const data = await api.getHeroBanners(page);
         setBanners(data);
       } catch (error) {
         console.error("Failed to fetch banners:", error);
@@ -49,7 +57,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
     };
 
     fetchBanners();
-  }, [page]);
+  }, [page, skipFetch]);
 
   const nextSlide = useCallback(() => {
     setCurrentIndex((prev) => (prev === banners.length - 1 ? 0 : prev + 1));
