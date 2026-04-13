@@ -2,6 +2,7 @@ import React, { useState, useRef, useEffect } from "react";
 import styles from "./ContactInfoSection.module.css";
 import { type Location } from "../../api/types";
 import config from "../../config/config";
+import { api } from "../../api/baseApi";
 import { FaDownload, FaPhoneAlt } from "react-icons/fa";
 import { FaLocationDot } from "react-icons/fa6";
 import { FcGoogle } from "react-icons/fc";
@@ -39,6 +40,24 @@ export const ContactInfoSection: React.FC<ContactInfoSectionProps> = ({ location
     return () => container.removeEventListener("scroll", handleScroll);
   }, []);
 
+  const [fallbackBrochure, setFallbackBrochure] = useState<string | null>(null);
+
+  useEffect(() => {
+    const fetchBrochure = async () => {
+      try {
+        const data = await api.getBrochure("franchise");
+        if (data && data.broucher) {
+          setFallbackBrochure(data.broucher);
+        }
+      } catch (e) {
+        console.error("Failed to fetch fallback brochure:", e);
+      }
+    };
+    if (!location.brochure) {
+      fetchBrochure();
+    }
+  }, [location.brochure]);
+
   return (
     <section className={styles.section}>
       <div className={styles.container}>
@@ -52,12 +71,18 @@ export const ContactInfoSection: React.FC<ContactInfoSectionProps> = ({ location
             </button>
             <div className={styles.carouselContainer} ref={galleryRef}>
               {location.images?.map((img, index) => (
-                <img
-                  key={index}
-                  src={config.BASE_URL.slice(0, -1) + img}
-                  alt={`${location.title} ${index + 1}`}
-                  className={styles.carouselImage}
-                />
+                <div key={index} className={styles.carouselItem}>
+                  <img
+                    src={config.BASE_URL.slice(0, -1) + img}
+                    alt={`${location.title} ${index + 1}`}
+                    className={styles.blurredBg}
+                  />
+                  <img
+                    src={config.BASE_URL.slice(0, -1) + img}
+                    alt={`${location.title} ${index + 1}`}
+                    className={styles.carouselImage}
+                  />
+                </div>
               ))}
             </div>
             <button className={styles.arrowNext} onClick={goNext}>
@@ -81,8 +106,8 @@ export const ContactInfoSection: React.FC<ContactInfoSectionProps> = ({ location
         <div className={styles.rightColumn}>
           <div className={styles.actionsBox}>
             {/* Download Brochure */}
-            {location.brochure && (
-               <a href={config.BASE_URL.slice(0, -1) + location.brochure} target="_blank" rel="noopener noreferrer" className={styles.btnBrochure}>
+            {(location.brochure || fallbackBrochure) && (
+               <a href={config.BASE_URL.slice(0, -1) + (location.brochure || fallbackBrochure)} target="_blank" rel="noopener noreferrer" className={styles.btnBrochure}>
                  <FaDownload className={styles.btnIcon} />
                  Download Brochure
                </a>

@@ -79,7 +79,7 @@ export const TestimonialSection: React.FC = () => {
       </h2>
 
       <div className={styles.carouselRow}>
-        <div className={styles.section__grid}>
+        <div className={`${styles.section__grid} ${styles.animate}`} key={currentPage}>
           {visibleTestimonials.map((testimonial) => (
             <TestimonialCard
               key={testimonial.id}

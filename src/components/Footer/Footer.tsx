@@ -6,8 +6,9 @@ import { FooterChip } from "./FooterChip/FooterChip";
 import { FooterAddress } from "./FooterAddress/FooterAddress";
 import { FooterFollow } from "./FooterFollow/FooterFollow";
 import { api } from "../../api/baseApi";
-import type { FooterChipData } from "../../api/types";
+import type { FooterChipData, Location } from "../../api/types";
 import { FaPhone, FaCalendarAlt, FaEnvelope, FaStar } from "react-icons/fa";
+import { useContact } from "../../context/ContactContext";
 import img1 from "../../assets/Footer/1.jpg";
 import img2 from "../../assets/Footer/2.jpg";
 import img3 from "../../assets/Footer/3.jpg";
@@ -15,21 +16,40 @@ import img4 from "../../assets/Footer/4.jpg";
 
 
 export const Footer: React.FC = () => {
+  const { phone } = useContact();
   const [chips, setChips] = useState<FooterChipData[]>(staticChips);
+  const [email, setEmail] = useState("info@nailsmaster.com");
+  const [reviewLink, setReviewLink] = useState("#");
 
   useEffect(() => {
-    const fetchChips = async () => {
+    const fetchFooterData = async () => {
       try {
-        const data = await api.getFooterChips();
-        if (data && data.length > 0) {
-          setChips(data);
+        const [chipsData, locationsData, addressData] = await Promise.all([
+          api.getFooterChips(),
+          api.getLocations(),
+          api.getFooterAddress().catch(() => null)
+        ]);
+
+        if (chipsData && chipsData.length > 0) {
+          setChips(chipsData);
+        }
+
+        if (addressData && (addressData as any).email) {
+          setEmail((addressData as any).email);
+        } else if (locationsData && locationsData.length > 0) {
+          setEmail(locationsData[0].email);
+        }
+
+        if (locationsData && locationsData.length > 0) {
+          const randomIndex = Math.floor(Math.random() * locationsData.length);
+          setReviewLink(locationsData[randomIndex].locationlink);
         }
       } catch (error) {
-        console.error("Failed to fetch footer chips:", error);
+        console.error("Failed to fetch footer data:", error);
       }
     };
 
-    fetchChips();
+    fetchFooterData();
   }, []);
 
   return (
@@ -41,18 +61,19 @@ export const Footer: React.FC = () => {
             <p className={styles.logoLight}>the studio</p>
           </div>
           <p className={styles.desc}>
-            Nails Master provides nail extensions, gel nails, acrylic art, and salon care by technicians. Explore services, view styles, and download brochures for treatments and pricing.!
+            Nails Master provides nail extensions, gel nails, acrylic art, and salon care by technicians. Explore services, view styles, and download brochures for treatments and pricing.
           </p>
         </div>
 
         <div className={styles.menu}>
           <h4>MENU</h4>
           <ul>
-            <li><Link to="/">Home</Link></li>
-            <li><Link to="/#services">Treatments</Link></li>
-            <li><Link to="/#problems">Problems</Link></li>
-            <li><Link to="/blogs">Blogs</Link></li>
-            <li><Link to="/contact">Contact</Link></li>
+            <li><Link to="/">HOME</Link></li>
+            <li><Link to="/#about">ABOUT</Link></li>
+            <li><Link to="/#services">SERVICES</Link></li>
+            <li><Link to="/blogs">BLOGS</Link></li>
+            <li><Link to="/franchise">FRANCHISE</Link></li>
+            <li><Link to="/academy">ACADEMY</Link></li>
           </ul>
         </div>
 
@@ -78,10 +99,28 @@ export const Footer: React.FC = () => {
       </div>
 
       <div className={styles.actionRow}>
-        <a className={styles.actionPill}><FaPhone /> Call Us Now</a>
-        <a className={styles.actionPill}><FaCalendarAlt /> Book Appoitment</a>
-        <a className={styles.actionPill}><FaEnvelope /> Mail Us</a>
-        <a className={styles.actionPill}><FaStar /> Contact & Review</a>
+        <a href={`tel:${phone}`} className={styles.actionPill}>
+          <FaPhone /> Call Us Now
+        </a>
+        <a 
+          href={`https://wa.me/${phone}?text=Hello! I would like to book an appointment.`} 
+          target="_blank" 
+          rel="noopener noreferrer" 
+          className={styles.actionPill}
+        >
+          <FaCalendarAlt /> Book Appointment
+        </a>
+        <a href={`mailto:${email}`} className={styles.actionPill}>
+          <FaEnvelope /> Mail Us
+        </a>
+        <a 
+          href={reviewLink} 
+          target="_blank" 
+          rel="noopener noreferrer" 
+          className={styles.actionPill}
+        >
+          <FaStar /> Review Us
+        </a>
       </div>
 
       <div className={styles.bottom}>
