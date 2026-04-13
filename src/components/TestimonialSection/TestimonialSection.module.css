@@ -49,12 +49,20 @@
 .carouselRow {
     width: 92%;
     max-width: 1200px;
-    display: flex;
-    justify-content: center;
+    overflow: hidden; /* Added */
+    padding: 10px 0;
 }
 
-/* GRID TAKES FULL WIDTH INSIDE WRAPPER */
+/* Changed from Grid to Flex for sliding effect */
 .section__grid {
+    display: flex;
+    gap: 40px;
+    width: 100%;
+    transition: transform 0.7s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.cardWrapper {
+    flex-shrink: 0;
     width: 100%;
 }
 
@@ -100,17 +108,17 @@
         padding: 0 15px;
     }
 }
-@keyframes fadeIn {
+@keyframes slideInRight {
     from {
         opacity: 0;
-        transform: translateY(10px);
+        transform: translateX(30px);
     }
     to {
         opacity: 1;
-        transform: translateY(0);
+        transform: translateX(0);
     }
 }
 
 .animate {
-    animation: fadeIn 0.5s ease-out;
+    animation: slideInRight 0.5s ease-out;
 }

@@ -54,11 +54,11 @@ export const TestimonialSection: React.FC = () => {
     }
   }, [itemsPerView, totalPages, currentPage]);
 
-  const startIndex = currentPage * itemsPerView;
-  const visibleTestimonials = testimonials.slice(
-    startIndex,
-    startIndex + itemsPerView
-  );
+  // const startIndex = currentPage * itemsPerView;
+  // const visibleTestimonials = testimonials.slice(
+  //   startIndex,
+  //   startIndex + itemsPerView
+  // );
 
   const goToPage = (page: number) => {
     let targetPage = page;
@@ -79,12 +79,18 @@ export const TestimonialSection: React.FC = () => {
       </h2>
 
       <div className={styles.carouselRow}>
-        <div className={`${styles.section__grid} ${styles.animate}`} key={currentPage}>
-          {visibleTestimonials.map((testimonial) => (
-            <TestimonialCard
-              key={testimonial.id}
-              testimonial={testimonial}
-            />
+        <div 
+          className={styles.section__grid} 
+          style={{ transform: `translateX(calc(-${currentPage * 100}% - ${currentPage * 40}px))` }}
+        >
+          {testimonials.map((testimonial) => (
+             <div 
+                key={testimonial.id} 
+                className={styles.cardWrapper}
+                style={{ width: `calc((100% - ${(itemsPerView - 1) * 40}px) / ${itemsPerView})` }}
+             >
+                <TestimonialCard testimonial={testimonial} />
+             </div>
           ))}
         </div>
       </div>

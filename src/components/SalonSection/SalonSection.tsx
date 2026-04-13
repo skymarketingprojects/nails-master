@@ -33,7 +33,7 @@
 //           </button>
 //         )} */}
 
-//         <div className={styles.section__cards}>
+//         <div className={`${styles.section__cards} ${styles.animate}`} key={currentPage}>
 //           {currentLocations.map((loc) => (
 //             <LocationCard key={loc.id} location={loc} />
 //           ))}
@@ -141,9 +141,18 @@ export const SalonSection: React.FC = () => {
 
       {/* Cards Container */}
       <div className={styles.section__carousel}>
-        <div className={styles.section__cards}>
-          {visibleLocations.map((loc) => (
-            <LocationCard key={loc.id} location={loc} />
+        <div 
+          className={styles.section__cards}
+          style={{ transform: `translateX(calc(-${currentPage * 100}% - ${currentPage * 30}px))` }}
+        >
+          {locations.map((loc) => (
+            <div 
+              key={loc.id} 
+              className={styles.cardWrapper}
+              style={{ width: `calc((100% - ${(itemsPerView - 1) * 30}px) / ${itemsPerView})` }}
+            >
+              <LocationCard location={loc} />
+            </div>
           ))}
         </div>
       </div>
