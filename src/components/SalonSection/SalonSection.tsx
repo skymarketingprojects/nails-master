@@ -113,8 +113,8 @@ export const SalonSection: React.FC = () => {
 
   if (loading) return null;
 
-  const startIndex = currentPage * itemsPerView;
-  const visibleLocations = locations.slice(startIndex, startIndex + itemsPerView);
+  // const startIndex = currentPage * itemsPerView;
+  // const visibleLocations = locations.slice(startIndex, startIndex + itemsPerView);
 
   const goToPage = (page: number) => {
     let targetPage = page;
@@ -141,13 +141,13 @@ export const SalonSection: React.FC = () => {
 
       {/* Cards Container */}
       <div className={styles.section__carousel}>
-        <div 
+        <div
           className={styles.section__cards}
           style={{ transform: `translateX(calc(-${currentPage * 100}% - ${currentPage * 30}px))` }}
         >
           {locations.map((loc) => (
-            <div 
-              key={loc.id} 
+            <div
+              key={loc.id}
               className={styles.cardWrapper}
               style={{ width: `calc((100% - ${(itemsPerView - 1) * 30}px) / ${itemsPerView})` }}
             >
