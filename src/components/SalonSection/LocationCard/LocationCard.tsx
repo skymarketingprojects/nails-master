@@ -100,7 +100,7 @@ export const LocationCard: React.FC<Props> = ({ location }) => {
         </div>
 
         <a
-          href={location.brochure ? (location.brochure.startsWith("http") ? location.brochure : config.BASE_URL.slice(0, -1) + location.brochure) : "#"}
+          href={location.broucher ? (location.broucher.startsWith("http") ? location.broucher : config.BASE_URL.slice(0, -1) + location.broucher) : "#"}
           target="_blank"
           rel="noopener noreferrer"
           className={styles.linkDownload}

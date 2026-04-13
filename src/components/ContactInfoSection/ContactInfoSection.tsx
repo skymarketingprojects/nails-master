@@ -1,4 +1,5 @@
 import React, { useState, useRef, useEffect } from "react";
+import { useParams } from "react-router-dom";
 import styles from "./ContactInfoSection.module.css";
 import { type Location } from "../../api/types";
 import config from "../../config/config";
@@ -40,23 +41,24 @@ export const ContactInfoSection: React.FC<ContactInfoSectionProps> = ({ location
     return () => container.removeEventListener("scroll", handleScroll);
   }, []);
 
+  const { slug } = useParams<{ slug: string }>();
   const [fallbackBrochure, setFallbackBrochure] = useState<string | null>(null);
 
   useEffect(() => {
-    const fetchBrochure = async () => {
+    const fetchBrochureFromServices = async () => {
       try {
-        const data = await api.getBrochure("franchise");
-        if (data && data.broucher) {
-          setFallbackBrochure(data.broucher);
+        const servicesData = await api.getServices({ location: slug, page_size: 1 });
+        if (servicesData && servicesData.results.length > 0 && servicesData.results[0].brochure) {
+          setFallbackBrochure(servicesData.results[0].brochure);
         }
       } catch (e) {
-        console.error("Failed to fetch fallback brochure:", e);
+        console.error("Failed to fetch brochure from services:", e);
       }
     };
-    if (!location.brochure) {
-      fetchBrochure();
+    if (!location.broucher) {
+      fetchBrochureFromServices();
     }
-  }, [location.brochure]);
+  }, [location.broucher, slug]);
 
   return (
     <section className={styles.section}>
@@ -105,14 +107,6 @@ export const ContactInfoSection: React.FC<ContactInfoSectionProps> = ({ location
         {/* Right Column: Info & Actions */}
         <div className={styles.rightColumn}>
           <div className={styles.actionsBox}>
-            {/* Download Brochure */}
-            {(location.brochure || fallbackBrochure) && (
-               <a href={config.BASE_URL.slice(0, -1) + (location.brochure || fallbackBrochure)} target="_blank" rel="noopener noreferrer" className={styles.btnBrochure}>
-                 <FaDownload className={styles.btnIcon} />
-                 Download Brochure
-               </a>
-            )}
-
             {/* Phone Number */}
             <a href={`tel:${location.phone}`} className={styles.btnPhone}>
                <FaPhoneAlt className={styles.btnIcon} />
@@ -123,6 +117,30 @@ export const ContactInfoSection: React.FC<ContactInfoSectionProps> = ({ location
             <a href={location.locationlink} target="_blank" rel="noopener noreferrer" className={styles.btnReview}>
                <FcGoogle className={styles.btnIcon} />
                Review Us
+            </a>
+
+            {/* Download Brochure */}
+            <a 
+              href={
+                location.broucher 
+                  ? (location.broucher.startsWith("http") ? location.broucher : config.BASE_URL.slice(0, -1) + location.broucher)
+                  : (fallbackBrochure 
+                      ? (fallbackBrochure.startsWith("http") ? fallbackBrochure : config.BASE_URL.slice(0, -1) + fallbackBrochure)
+                      : "#"
+                    )
+              } 
+              target="_blank" 
+              rel="noopener noreferrer" 
+              className={styles.btnBrochure}
+              onClick={(e) => {
+                if (!location.broucher && !fallbackBrochure) {
+                  e.preventDefault();
+                  alert("Brochure is being updated. Please check back later.");
+                }
+              }}
+            >
+              <FaDownload className={styles.btnIcon} />
+              Download Brochure
             </a>
 
             {/* Address */}

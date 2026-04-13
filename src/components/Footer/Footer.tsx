@@ -7,8 +7,9 @@ import { FooterAddress } from "./FooterAddress/FooterAddress";
 import { FooterFollow } from "./FooterFollow/FooterFollow";
 import { api } from "../../api/baseApi";
 import type { FooterChipData } from "../../api/types";
-import { FaPhone, FaCalendarAlt, FaEnvelope, FaStar } from "react-icons/fa";
+import { FaPhone, FaCalendarAlt, FaEnvelope, FaStar, FaDownload } from "react-icons/fa";
 import { useContact } from "../../context/ContactContext";
+import config from "../../config/config";
 import img1 from "../../assets/Footer/1.jpg";
 import img2 from "../../assets/Footer/2.jpg";
 import img3 from "../../assets/Footer/3.jpg";
@@ -20,14 +21,16 @@ export const Footer: React.FC = () => {
   const [chips, setChips] = useState<FooterChipData[]>(staticChips);
   const [email, setEmail] = useState("info@nailsmaster.com");
   const [reviewLink, setReviewLink] = useState("#");
+  const [brochureLink, setBrochureLink] = useState("#");
 
   useEffect(() => {
     const fetchFooterData = async () => {
       try {
-        const [chipsData, locationsData, addressData] = await Promise.all([
+        const [chipsData, locationsData, addressData, servicesData] = await Promise.all([
           api.getFooterChips(),
           api.getLocations(),
-          api.getFooterAddress().catch(() => null)
+          api.getFooterAddress().catch(() => null),
+          api.getServices({ page_size: 1 }).catch(() => null)
         ]);
 
         if (chipsData && chipsData.length > 0) {
@@ -41,8 +44,16 @@ export const Footer: React.FC = () => {
         }
 
         if (locationsData && locationsData.length > 0) {
-          const randomIndex = Math.floor(Math.random() * locationsData.length);
-          setReviewLink(locationsData[randomIndex].locationlink);
+          const locationsWithLinks = locationsData.filter(loc => loc.locationlink);
+          if (locationsWithLinks.length > 0) {
+            const randomIndex = Math.floor(Math.random() * locationsWithLinks.length);
+            setReviewLink(locationsWithLinks[randomIndex].locationlink);
+          }
+        }
+
+        if (servicesData && servicesData.results.length > 0 && servicesData.results[0].brochure) {
+           const brochureUrl = servicesData.results[0].brochure;
+           setBrochureLink(brochureUrl.startsWith("http") ? brochureUrl : config.BASE_URL.slice(0, -1) + brochureUrl);
         }
       } catch (error) {
         console.error("Failed to fetch footer data:", error);
@@ -120,6 +131,20 @@ export const Footer: React.FC = () => {
           className={styles.actionPill}
         >
           <FaStar /> Review Us
+        </a>
+        <a 
+          href={brochureLink} 
+          target="_blank" 
+          rel="noopener noreferrer" 
+          className={styles.actionPill}
+          onClick={(e) => {
+            if (brochureLink === "#") {
+              e.preventDefault();
+              alert("Brochure not available at the moment.");
+            }
+          }}
+        >
+          <FaDownload /> Brochure
         </a>
       </div>
 

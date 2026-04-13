@@ -43,7 +43,7 @@ export interface Location {
   locationlink: string;
   mapLink: string;
   timing: Array<{ day: string; time: string }>;
-  brochure?: string;
+  broucher?: string;
 }
 
 export interface Category {
