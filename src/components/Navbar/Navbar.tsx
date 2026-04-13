@@ -150,7 +150,7 @@ export const Navbar: React.FC = () => {
             className={styles.whatsappPill}
           >
             <FaWhatsapp className={styles.whatsappIcon} />
-            <span>+{phone}</span>
+            <span>{phone}</span>
           </a>
           <div className={styles.socialIcons}>
             {socials.map((social) => (
@@ -177,7 +177,7 @@ export const Navbar: React.FC = () => {
           className={styles.whatsappPill}
         >
           <FaWhatsapp className={styles.whatsappIcon} />
-          <span>+{phone}</span>
+          <span>{phone}</span>
         </a>
         <div className={styles.socialIconsDesktop}>
           {socials.map((social) => (
