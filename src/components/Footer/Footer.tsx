@@ -6,7 +6,7 @@ import { FooterChip } from "./FooterChip/FooterChip";
 import { FooterAddress } from "./FooterAddress/FooterAddress";
 import { FooterFollow } from "./FooterFollow/FooterFollow";
 import { api } from "../../api/baseApi";
-import type { FooterChipData, Location } from "../../api/types";
+import type { FooterChipData } from "../../api/types";
 import { FaPhone, FaCalendarAlt, FaEnvelope, FaStar } from "react-icons/fa";
 import { useContact } from "../../context/ContactContext";
 import img1 from "../../assets/Footer/1.jpg";
