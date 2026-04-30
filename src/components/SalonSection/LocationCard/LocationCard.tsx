@@ -89,7 +89,7 @@ export const LocationCard: React.FC<Props> = ({ location }) => {
           </a>
 
           <a
-            href={location.locationlink || "#"}
+            href={location.reviewLink || location.locationlink || "#"}
             target="_blank"
             rel="noopener noreferrer"
             className={styles.btnOutlined}

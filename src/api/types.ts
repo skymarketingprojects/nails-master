@@ -42,6 +42,7 @@ export interface Location {
   images: string[];
   locationlink: string;
   mapLink: string;
+  reviewLink?: string;
   timing: Array<{ day: string; time: string }>;
   broucher?: string;
 }

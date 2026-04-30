@@ -44,10 +44,11 @@ export const Footer: React.FC = () => {
         }
 
         if (locationsData && locationsData.length > 0) {
-          const locationsWithLinks = locationsData.filter(loc => loc.locationlink);
+          const locationsWithLinks = locationsData.filter(loc => loc.reviewLink || loc.locationlink);
           if (locationsWithLinks.length > 0) {
             const randomIndex = Math.floor(Math.random() * locationsWithLinks.length);
-            setReviewLink(locationsWithLinks[randomIndex].locationlink);
+            const loc = locationsWithLinks[randomIndex];
+            setReviewLink(loc.reviewLink || loc.locationlink || "#");
           }
         }
 

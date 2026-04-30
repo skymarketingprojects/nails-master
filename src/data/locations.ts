@@ -40,6 +40,7 @@ export interface Location {
   images: string[];
   mapLink: string;
   locationlink: string;
+  reviewLink?: string;
 }
 
 export const locations: Location[] = [
@@ -56,6 +57,7 @@ export const locations: Location[] = [
     email: "",
     images: palamImages,
     locationlink:"https://maps.app.goo.gl/14JATyjXrWxZ5Lew6",
+    reviewLink: "https://g.page/r/CdfPNSREKDyOEAg/review",
     mapLink: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3503.4010674706415!2d77.0835711!3d28.5877426!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x390d1b6d2d9f2ec1%3A0xce3c28442d354fd5!2sNail%20master%20palam!5e0!3m2!1sen!2sin!4v1772007274527!5m2!1sen!2sin",
   },
   {
@@ -71,6 +73,7 @@ export const locations: Location[] = [
     email: "",
     images: dashrathpuriImages,
     locationlink:"https://maps.app.goo.gl/V23vtXVR8HpXX6wJA",
+    reviewLink: "https://g.page/r/Cf6I4bREaE7hEAg/review",
     mapLink: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3502.945145049438!2d77.08208069999999!3d28.6014224!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x390d1b57fee09399%3A0xe14f6844b4b18cf6!2sNail%20master%20dashrathpuri!5e0!3m2!1sen!2sin!4v1772007107259!5m2!1sen!2sin",
   },
   {
@@ -86,6 +89,7 @@ export const locations: Location[] = [
     email: "",
     images: sector19Images,
     locationlink:"https://maps.app.goo.gl/Cig9SvnSuey7xXHV7",
+    reviewLink: "https://g.page/r/Cnr_Ai2jPAI4EAg/review",
     mapLink: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3503.749135472984!2d77.04682509999999!3d28.5772949!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x390d1b2661f53b19%3A0x38f73ca32d02cf7a!2sNail%20master%20sector%2019!5e0!3m2!1sen!2sin!4v1772021060487!5m2!1sen!2sin",
   },
 
@@ -102,6 +106,7 @@ export const locations: Location[] = [
     email: "",
     images: sector7OldImages,
     locationlink:"https://maps.app.goo.gl/qQtbr4xqZ8Su12eQ7",
+    reviewLink: "https://g.page/r/CWVy97mJeS7FEAg/review",
     mapLink: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3736.117507774118!2d77.06867817563553!3d28.58580878620062!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x390d1b0af0de53d7%3A0xc5ce3b49b9f77261!2sNAIL%20MASTER%20(nails%20studio)!5e1!3m2!1sen!2sin!4v1771394631336!5m2!1sen!2sin",
   },
   {
@@ -117,6 +122,7 @@ export const locations: Location[] = [
     email: "",
     images: sector7Images,
     locationlink:"https://maps.app.goo.gl/ourvmoD3FzgWEMwt5",
+    reviewLink: "https://g.page/r/COPTcRhyU-0vEAg/review",
     mapLink: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3503.4428443140678!2d77.07145!3d28.586488799999994!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x390d1b0d35710cc9%3A0x20d56a7318ed53e8!2sNails%20master%20branch%202!5e0!3m2!1sen!2sin!4v1772020963110!5m2!1sen!2sin",
   },
 ];

@@ -174,6 +174,18 @@ export const LocationContactSection: React.FC<Props> = ({ location }) => {
             Visit Location Page
           </a>
 
+          {(location.reviewLink || location.locationlink) && (
+            <a
+              href={location.reviewLink || location.locationlink}
+              className={styles.reviewBtn}
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <FcGoogle className={styles.googleIcon} />
+              Review Us on Google
+            </a>
+          )}
+
           {location.phone && (
             <a href={`https://wa.me/${location.phone}`} className={styles.contact}>
               <FaPhoneAlt className={styles.contactIcon} />
